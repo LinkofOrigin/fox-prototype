@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackR" load_steps=2 format=3 uid="uid://rximbp6745ox"]
+
+[ext_resource type="Script" path="res://Code/Resources/attack_resource.gd" id="1_gmofe"]
+
+[resource]
+script = ExtResource("1_gmofe")
+damageAmount = 50.0
+attackSpeed = 3.0

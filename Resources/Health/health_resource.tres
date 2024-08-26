@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HealthR" load_steps=2 format=3 uid="uid://bbghw6y4bktqv"]
+
+[ext_resource type="Script" path="res://Code/Resources/health_resource.gd" id="1_78mu5"]
+
+[resource]
+script = ExtResource("1_78mu5")
+maxHealth = 100.0
+initialHealth = 100.0

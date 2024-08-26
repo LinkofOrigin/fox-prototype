@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://d38t8ftlwvqhq"]
+
+[ext_resource type="Script" path="res://Code/Weapons/Arrows/base_arrow.gd" id="1_oe36s"]
+[ext_resource type="Resource" uid="uid://m4l1e1fh3rdc" path="res://Resources/Movement/arrow_movement_resource.tres" id="2_5sofp"]
+[ext_resource type="Resource" uid="uid://o17i13g72cy" path="res://Resources/Damage/base_arrow_damage_resource.tres" id="3_dqcf6"]
+[ext_resource type="Texture2D" uid="uid://bxixvqoevljx5" path="res://Assets/Bow/Bow and Arrows.png" id="4_g2wrg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlls3"]
+atlas = ExtResource("4_g2wrg")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25hsr"]
+size = Vector2(15, 7)
+
+[node name="BaseArrow" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+input_pickable = false
+script = ExtResource("1_oe36s")
+movement_resource = ExtResource("2_5sofp")
+damage_resource = ExtResource("3_dqcf6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_qlls3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_25hsr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.890124, -0.5)
+scale = Vector2(0.889012, 0.35)
+rect = Rect2(-10, -10, 18.02, 20)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

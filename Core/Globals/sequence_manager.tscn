@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chmc64wc1rpva"]
+
+[ext_resource type="Script" path="res://Code/Core/Globals/sequence_manager.gd" id="1_1mbv8"]
+
+[node name="SequenceManager" type="Node"]
+script = ExtResource("1_1mbv8")

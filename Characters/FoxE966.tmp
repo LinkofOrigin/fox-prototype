@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://djjpq1qio501t"]
+
+[ext_resource type="PackedScene" uid="uid://buqyklgjm3230" path="res://Assets/fox-anim/fox_anim_sprite.tscn" id="1_q6qxu"]
+[ext_resource type="PackedScene" uid="uid://cd1yfkqpg8gdb" path="res://Weapons/Bow/SimpleBow.tscn" id="2_n6brq"]
+[ext_resource type="PackedScene" uid="uid://cgfscyhtuiq86" path="res://Components/PlayerControllerC.tscn" id="3_ys30x"]
+[ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/MovementC.tscn" id="4_x5nqe"]
+[ext_resource type="Resource" uid="uid://boj2cx4wg1du" path="res://Resources/player_movement.tres" id="5_t17hv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwomv"]
+size = Vector2(21, 27)
+
+[node name="FoxChar" type="CharacterBody2D"]
+scale = Vector2(2.40675, 2.40675)
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("1_q6qxu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 2.5)
+shape = SubResource("RectangleShape2D_uwomv")
+
+[node name="SimpleBow" parent="." instance=ExtResource("2_n6brq")]
+position = Vector2(0, 7.06346)
+rotation = 0.55804
+scale = Vector2(0.734302, 0.734302)
+
+[node name="PlayerControllerC" parent="." instance=ExtResource("3_ys30x")]
+
+[node name="MovementC" parent="PlayerControllerC" instance=ExtResource("4_x5nqe")]
+movementR = ExtResource("5_t17hv")

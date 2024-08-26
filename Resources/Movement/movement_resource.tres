@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MovementR" load_steps=2 format=3 uid="uid://csiqv876aft80"]
+
+[ext_resource type="Script" path="res://Code/Resources/movement_resource.gd" id="1_einu8"]
+
+[resource]
+script = ExtResource("1_einu8")
+speed = 0.0

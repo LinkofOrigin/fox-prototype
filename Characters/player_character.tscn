@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://y026kijomwv2"]
+
+[ext_resource type="PackedScene" uid="uid://buqyklgjm3230" path="res://Assets/fox-anim/fox_anim_sprite.tscn" id="1_d0msv"]
+[ext_resource type="PackedScene" uid="uid://cgfscyhtuiq86" path="res://Components/player_controller_component.tscn" id="2_4u0vl"]
+[ext_resource type="PackedScene" uid="uid://cd1yfkqpg8gdb" path="res://Weapons/Bows/simple_bow.tscn" id="2_b6eu2"]
+[ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/movement_component.tscn" id="2_uxbdt"]
+[ext_resource type="Resource" uid="uid://boj2cx4wg1du" path="res://Resources/Movement/player_movement_resource.tres" id="5_2kd6u"]
+[ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="6_yevx0"]
+[ext_resource type="Resource" uid="uid://dkjtrf5sfgt22" path="res://Resources/Health/player_health_resource.tres" id="7_u16hd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c66qy"]
+size = Vector2(18, 26)
+
+[node name="PlayerCharacter" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 4
+collision_mask = 19
+
+[node name="FoxAnimSprite" parent="." instance=ExtResource("1_d0msv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 3)
+shape = SubResource("RectangleShape2D_c66qy")
+
+[node name="SimpleBow" parent="." instance=ExtResource("2_b6eu2")]
+position = Vector2(0, 7.06346)
+rotation = 0.55804
+scale = Vector2(0.734302, 0.734302)
+
+[node name="PlayerControllerC" parent="." instance=ExtResource("2_4u0vl")]
+
+[node name="MovementC" parent="PlayerControllerC" instance=ExtResource("2_uxbdt")]
+movement_resource = ExtResource("5_2kd6u")
+
+[node name="HealthC" parent="." instance=ExtResource("6_yevx0")]
+health_resource = ExtResource("7_u16hd")

@@ -1,0 +1,132 @@
+[gd_scene load_steps=15 format=3 uid="uid://cd1yfkqpg8gdb"]
+
+[ext_resource type="Texture2D" uid="uid://bxixvqoevljx5" path="res://Assets/Bow/Bow and Arrows.png" id="1_rur68"]
+[ext_resource type="Script" path="res://Code/Weapons/Bows/simple_bow.gd" id="2_csmrg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ebi0"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34pdh"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1sxy"]
+atlas = ExtResource("1_rur68")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kmgx"]
+atlas = ExtResource("1_rur68")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugeh2"]
+atlas = ExtResource("1_rur68")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6guc5"]
+atlas = ExtResource("1_rur68")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li1yl"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v434d"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvrrr"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nwjk"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulw8k"]
+atlas = ExtResource("1_rur68")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kf57"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_4ebi0")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_34pdh")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_j1sxy")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_8kmgx")
+}],
+"loop": false,
+"name": &"Draw",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kmgx")
+}],
+"loop": false,
+"name": &"Drawn",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugeh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6guc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li1yl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v434d")
+}],
+"loop": false,
+"name": &"Fire",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvrrr")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_0nwjk")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ulw8k")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_0nwjk")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ulw8k")
+}, {
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_0nwjk")
+}],
+"loop": false,
+"name": &"IdleFidget",
+"speed": 60.0
+}]
+
+[node name="SimpleBow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_6kf57")
+animation = &"Idle"
+autoplay = "Idle"
+script = ExtResource("2_csmrg")
+
+[node name="ArrowRoot" type="Marker2D" parent="."]
+position = Vector2(1, 0)
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

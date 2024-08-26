@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7a6aijgjq2lu"]
+
+[ext_resource type="Script" path="res://Code/Core/local_sequence.gd" id="1_vep6g"]
+
+[node name="LocalSequence" type="Node"]
+script = ExtResource("1_vep6g")

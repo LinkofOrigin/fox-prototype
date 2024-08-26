@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://djjpq1qio501t"]
+
+[ext_resource type="PackedScene" uid="uid://buqyklgjm3230" path="res://Assets/fox-anim/fox_anim_sprite.tscn" id="1_q6qxu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwomv"]
+size = Vector2(21, 27)
+
+[node name="FoxChar" type="CharacterBody2D"]
+scale = Vector2(2.40675, 2.40675)
+
+[node name="FoxAnimSprite" parent="." instance=ExtResource("1_q6qxu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 2.5)
+shape = SubResource("RectangleShape2D_uwomv")

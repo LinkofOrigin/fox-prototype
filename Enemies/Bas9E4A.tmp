@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7y33pu3yqjxo"]
+
+[ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_wlyxw"]
+[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/FoxyCharAnimSprite.tscn" id="2_uj26b"]
+[ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/HealthC.tscn" id="3_5kr2t"]
+[ext_resource type="Resource" uid="uid://drfc6x6rk2wcf" path="res://Resources/Health/BaseEnemyHealthR.tres" id="4_mv6rr"]
+[ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/MovementC.tscn" id="6_pihmy"]
+[ext_resource type="Resource" uid="uid://4w8rmt82a34v" path="res://Resources/Movement/EnemyMovementR.tres" id="7_d8f4c"]
+[ext_resource type="PackedScene" uid="uid://d1j6g6a1c11fn" path="res://Components/AttackC.tscn" id="7_qm82a"]
+[ext_resource type="Resource" uid="uid://6n0r871v223y" path="res://Resources/Attacks/BaseEnemyAttackR.tres" id="8_vvkpw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2hge"]
+size = Vector2(46, 52)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly3op"]
+radius = 45.0
+height = 114.0
+
+[node name="BaseEnemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 19
+script = ExtResource("1_wlyxw")
+
+[node name="FoxyCharAnimSprite" parent="." instance=ExtResource("2_uj26b")]
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_b2hge")
+
+[node name="HealthC" parent="." instance=ExtResource("3_5kr2t")]
+healthR = ExtResource("4_mv6rr")
+
+[node name="MovementC" parent="." instance=ExtResource("6_pihmy")]
+movementR = ExtResource("7_d8f4c")
+
+[node name="AttackC" parent="." instance=ExtResource("7_qm82a")]
+attackR = ExtResource("8_vvkpw")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(27, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_ly3op")
+
+[connection signal="animation_finished" from="FoxyCharAnimSprite" to="." method="_on_foxy_char_anim_sprite_animation_finished"]
+[connection signal="healthReachedZero" from="HealthC" to="." method="_on_health_c_health_reached_zero"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

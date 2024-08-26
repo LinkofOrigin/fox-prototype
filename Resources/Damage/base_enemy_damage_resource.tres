@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DamageResource" load_steps=2 format=3 uid="uid://ckmw22kvhf4b5"]
+
+[ext_resource type="Script" path="res://Code/Resources/damage_resource.gd" id="1_y1re5"]
+
+[resource]
+script = ExtResource("1_y1re5")
+damage_amount = 15.0
