@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cc255nqc87tar"]
+
+[ext_resource type="Script" path="res://Code/Resources/global_sequence_resource.gd" id="1_0bck6"]
+
+[resource]
+script = ExtResource("1_0bck6")

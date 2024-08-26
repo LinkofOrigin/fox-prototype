@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 SequenceManager="*res://Core/Globals/sequence_manager.tscn"
 InputActions="*res://Code/Core/Globals/input_actions.gd"
 GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
+SequenceTriggerFactory="*res://Code/Core/Globals/sequence_trigger_factory.gd"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=720
 
 [global_group]
 

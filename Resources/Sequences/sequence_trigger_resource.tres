@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SequenceTriggerResource" load_steps=2 format=3 uid="uid://ybrdc6v2jh8a"]
+
+[ext_resource type="Script" path="res://Code/Resources/sequence_trigger_resource.gd" id="1_84aic"]
+
+[resource]
+script = ExtResource("1_84aic")

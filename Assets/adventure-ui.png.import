@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxcdudjd2ifnq"
-path="res://.godot/imported/floortileset.png-cb8165f7bbcfd7eb384243d975d0e119.ctex"
+uid="uid://b0pcq7rm0k8ow"
+path="res://.godot/imported/adventure-ui.png-ba188ae37ed5d7e015b66834ecb06974.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/floortileset.png"
-dest_files=["res://.godot/imported/floortileset.png-cb8165f7bbcfd7eb384243d975d0e119.ctex"]
+source_file="res://Assets/adventure-ui.png"
+dest_files=["res://.godot/imported/adventure-ui.png-ba188ae37ed5d7e015b66834ecb06974.ctex"]
 
 [params]
 
