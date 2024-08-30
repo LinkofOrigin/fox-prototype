@@ -1,0 +1,158 @@
+[gd_scene load_steps=13 format=3 uid="uid://ctolkt7tvsfbq"]
+
+[ext_resource type="Texture2D" uid="uid://c7wng2viibe8k" path="res://Assets/Proto1BGs/TestFoxPrototypeCombat.png" id="1_qlpuc"]
+[ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_w1m56"]
+[ext_resource type="PackedScene" uid="uid://2evcu7nf1hu6" path="res://Enemies/proto1_enemy.tscn" id="3_loh50"]
+[ext_resource type="PackedScene" uid="uid://cpq2ixabbi3k3" path="res://Enemies/proto1_boss.tscn" id="4_lff07"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sw1ah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2e02"]
+size = Vector2(79, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk4wf"]
+size = Vector2(63, 182)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_002fg"]
+b = Vector2(234, 620)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_brsn0"]
+b = Vector2(-957, 0)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5d7we"]
+points = PackedVector2Array(-73, 0, -143, 54, -175, 172, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrb2g"]
+size = Vector2(850, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dku1a"]
+size = Vector2(162, 108)
+
+[node name="CombatScene" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(517, 359)
+scale = Vector2(0.512079, 0.612576)
+texture = ExtResource("1_qlpuc")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_w1m56")]
+position = Vector2(160, 132)
+
+[node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
+zoom = Vector2(1.67, 1.67)
+limit_left = 0
+limit_top = 0
+limit_right = 1080
+limit_bottom = 720
+
+[node name="Proto1Squid" parent="." instance=ExtResource("3_loh50")]
+position = Vector2(457, 400)
+
+[node name="Proto1Squid2" parent="." instance=ExtResource("3_loh50")]
+position = Vector2(529, 300)
+
+[node name="Proto1Squid3" parent="." instance=ExtResource("3_loh50")]
+position = Vector2(614, 404)
+
+[node name="LevelWalls" type="Node" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="LevelWalls"]
+position = Vector2(529, 0)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Top"]
+shape = SubResource("WorldBoundaryShape2D_sw1ah")
+
+[node name="Left" type="StaticBody2D" parent="LevelWalls"]
+position = Vector2(0, 274)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Left"]
+shape = SubResource("WorldBoundaryShape2D_sw1ah")
+
+[node name="Right" type="StaticBody2D" parent="LevelWalls"]
+position = Vector2(1080, 354)
+rotation = 4.71239
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Right"]
+shape = SubResource("WorldBoundaryShape2D_sw1ah")
+
+[node name="Bot" type="StaticBody2D" parent="LevelWalls"]
+position = Vector2(559, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Bot"]
+shape = SubResource("WorldBoundaryShape2D_sw1ah")
+
+[node name="LeftTransition" type="Area2D" parent="."]
+position = Vector2(34, 67)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTransition"]
+shape = SubResource("RectangleShape2D_n2e02")
+
+[node name="RightTransition" type="Area2D" parent="."]
+position = Vector2(1058, 319)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTransition"]
+shape = SubResource("RectangleShape2D_uk4wf")
+
+[node name="ZoneCollision" type="Node" parent="."]
+
+[node name="RightLine" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(-3, 135)
+collision_layer = 3
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/RightLine"]
+shape = SubResource("SegmentShape2D_002fg")
+
+[node name="BottomLine" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(891, 554)
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/BottomLine"]
+position = Vector2(36, 13)
+shape = SubResource("SegmentShape2D_brsn0")
+
+[node name="BotRightPoly" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(1091, 412)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/BotRightPoly"]
+shape = SubResource("ConvexPolygonShape2D_5d7we")
+
+[node name="TopPoly" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(248, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/TopPoly"]
+position = Vector2(439, 59)
+shape = SubResource("RectangleShape2D_vrb2g")
+
+[node name="RightTopPoly" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(1041, 167)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/RightTopPoly"]
+position = Vector2(-9, 5)
+shape = SubResource("RectangleShape2D_dku1a")
+
+[node name="BaseEnemy" parent="." instance=ExtResource("4_lff07")]
+position = Vector2(604, 339)
+
+[node name="SpawnMarkers" type="Node" parent="."]
+
+[node name="TopSquidSpawn" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(530, 305)
+
+[node name="BotLeftSquidSpawn" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(457, 401)
+
+[node name="BotRightSquidSpawn" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(613, 406)
+
+[node name="BossSpawn" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(603, 339)

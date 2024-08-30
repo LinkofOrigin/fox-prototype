@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0pcq7rm0k8ow"
-path="res://.godot/imported/adventure-ui.png-ba188ae37ed5d7e015b66834ecb06974.ctex"
+uid="uid://b2da6hgjg12m8"
+path="res://.godot/imported/fishbone.png-68b166b07ae82b86055056242244f072.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/adventure-ui.png"
-dest_files=["res://.godot/imported/adventure-ui.png-ba188ae37ed5d7e015b66834ecb06974.ctex"]
+source_file="res://Assets/extraCreatures/fishbone.png"
+dest_files=["res://.godot/imported/fishbone.png-68b166b07ae82b86055056242244f072.ctex"]
 
 [params]
 

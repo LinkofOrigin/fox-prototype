@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_d6w75")
 damage_resource = ExtResource("1_uxf8v")
-attack_speed = 0.0
+attack_speed = 2.0

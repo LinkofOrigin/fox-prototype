@@ -1,0 +1,155 @@
+[gd_scene load_steps=17 format=3 uid="uid://2evcu7nf1hu6"]
+
+[ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_m82fj"]
+[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_5sprc"]
+[ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="3_geyjj"]
+[ext_resource type="Texture2D" uid="uid://bj4dwhm247nc6" path="res://Assets/extraCreatures/shredSquid.png" id="3_vuitc"]
+[ext_resource type="Resource" uid="uid://drfc6x6rk2wcf" path="res://Resources/Health/base_enemy_health_resource.tres" id="4_18yay"]
+[ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/movement_component.tscn" id="5_crsse"]
+[ext_resource type="Resource" uid="uid://4w8rmt82a34v" path="res://Resources/Movement/enemy_movement_resource.tres" id="6_merbb"]
+[ext_resource type="PackedScene" uid="uid://d1j6g6a1c11fn" path="res://Components/attack_component.tscn" id="7_70qbg"]
+[ext_resource type="Resource" uid="uid://6n0r871v223y" path="res://Resources/Attacks/base_enemy_attack_resource.tres" id="8_6js2t"]
+
+[sub_resource type="Animation" id="Animation_7214e"]
+resource_name = "Death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_mihs2"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_j6x6g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyAnimSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0wv8i"]
+_data = {
+"Death": SubResource("Animation_7214e"),
+"Idle": SubResource("Animation_mihs2"),
+"RESET": SubResource("Animation_j6x6g")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ng6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vuitc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vuitc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vuitc")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vuitc")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ovcx"]
+radius = 27.0
+height = 82.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly3op"]
+radius = 51.0
+height = 152.0
+
+[node name="Proto1Squid" type="CharacterBody2D" groups=["Enemy"]]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 31
+motion_mode = 1
+platform_floor_layers = 4294967288
+script = ExtResource("1_m82fj")
+
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0wv8i")
+}
+autoplay = "Idle"
+
+[node name="EnemyAnimSprite" parent="." instance=ExtResource("2_5sprc")]
+sprite_frames = SubResource("SpriteFrames_5ng6n")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_0ovcx")
+
+[node name="HealthC" parent="." instance=ExtResource("3_geyjj")]
+health_resource = ExtResource("4_18yay")
+
+[node name="MovementC" parent="." instance=ExtResource("5_crsse")]
+movement_resource = ExtResource("6_merbb")
+
+[node name="AttackC" parent="." instance=ExtResource("7_70qbg")]
+attack_resource = ExtResource("8_6js2t")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(13, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_ly3op")
+
+[connection signal="animation_finished" from="EnemyAnimationPlayer" to="." method="_on_enemy_animation_player_animation_finished"]
+[connection signal="health_reached_zero" from="HealthC" to="." method="_on_health_c_health_reached_zero"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

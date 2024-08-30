@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://cygssyixapwn8"]
+
+[ext_resource type="Resource" uid="uid://cebqj0a1nw8rk" path="res://Resources/Damage/boss_damage_resource.tres" id="1_14sjw"]
+[ext_resource type="Script" path="res://Code/Resources/attack_resource.gd" id="1_q11nu"]
+
+[resource]
+script = ExtResource("1_q11nu")
+damage_resource = ExtResource("1_14sjw")
+attack_speed = 3.0

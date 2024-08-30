@@ -1,13 +1,67 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7y33pu3yqjxo"]
+[gd_scene load_steps=15 format=3 uid="uid://c7y33pu3yqjxo"]
 
 [ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_wlyxw"]
-[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/foxy_char_anim_sprite.tscn" id="2_uj26b"]
+[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_uj26b"]
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="3_5kr2t"]
 [ext_resource type="Resource" uid="uid://drfc6x6rk2wcf" path="res://Resources/Health/base_enemy_health_resource.tres" id="4_mv6rr"]
 [ext_resource type="Resource" uid="uid://4w8rmt82a34v" path="res://Resources/Movement/enemy_movement_resource.tres" id="6_47vtx"]
 [ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/movement_component.tscn" id="6_pihmy"]
 [ext_resource type="PackedScene" uid="uid://d1j6g6a1c11fn" path="res://Components/attack_component.tscn" id="7_qm82a"]
 [ext_resource type="Resource" uid="uid://6n0r871v223y" path="res://Resources/Attacks/base_enemy_attack_resource.tres" id="8_gt23d"]
+
+[sub_resource type="Animation" id="Animation_qegbm"]
+resource_name = "Death"
+length = 2.4
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"Death", &"Death"]
+}
+
+[sub_resource type="Animation" id="Animation_46jbu"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_vnvd1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_al3il"]
+_data = {
+"Death": SubResource("Animation_qegbm"),
+"Idle": SubResource("Animation_46jbu"),
+"RESET": SubResource("Animation_vnvd1")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2hge"]
 size = Vector2(46, 52)
@@ -19,10 +73,18 @@ height = 114.0
 [node name="BaseEnemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 19
+motion_mode = 1
+platform_floor_layers = 4294967288
 script = ExtResource("1_wlyxw")
 
-[node name="FoxyCharAnimSprite" parent="." instance=ExtResource("2_uj26b")]
-animation = &"Idle"
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_al3il")
+}
+autoplay = "Idle"
+
+[node name="EnemyAnimSprite" parent="." instance=ExtResource("2_uj26b")]
+animation = &"Death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)
@@ -47,7 +109,7 @@ position = Vector2(27, 0)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_ly3op")
 
-[connection signal="animation_finished" from="FoxyCharAnimSprite" to="." method="_on_foxy_char_anim_sprite_animation_finished"]
+[connection signal="animation_finished" from="EnemyAnimationPlayer" to="." method="_on_enemy_animation_player_animation_finished"]
 [connection signal="health_reached_zero" from="HealthC" to="." method="_on_health_c_health_reached_zero"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

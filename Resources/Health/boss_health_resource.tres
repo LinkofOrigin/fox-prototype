@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HealthResource" load_steps=2 format=3 uid="uid://djs76fsxg651l"]
+
+[ext_resource type="Script" path="res://Code/Resources/health_resource.gd" id="1_oqep4"]
+
+[resource]
+script = ExtResource("1_oqep4")
+max_health = 200.0
+initial_health = 200.0

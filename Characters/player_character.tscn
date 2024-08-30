@@ -8,18 +8,22 @@
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="6_yevx0"]
 [ext_resource type="Resource" uid="uid://dkjtrf5sfgt22" path="res://Resources/Health/player_health_resource.tres" id="7_u16hd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c66qy"]
-size = Vector2(18, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljt7x"]
+radius = 7.0
+height = 28.0
 
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(2.19, 2.19)
 collision_layer = 4
-collision_mask = 19
+collision_mask = 11
+motion_mode = 1
+platform_floor_layers = 4294967264
 
 [node name="FoxAnimSprite" parent="." instance=ExtResource("1_d0msv")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 3)
-shape = SubResource("RectangleShape2D_c66qy")
+position = Vector2(-1, 3)
+shape = SubResource("CapsuleShape2D_ljt7x")
 
 [node name="SimpleBow" parent="." instance=ExtResource("2_b6eu2")]
 position = Vector2(0, 7.06346)

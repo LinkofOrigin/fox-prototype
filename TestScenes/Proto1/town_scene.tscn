@@ -1,0 +1,336 @@
+[gd_scene load_steps=23 format=3 uid="uid://dpgwq8j571nep"]
+
+[ext_resource type="Texture2D" uid="uid://d22tl0dlbggfc" path="res://Assets/Proto1BGs/TestFoxPrototypeTown.png" id="1_rbmk5"]
+[ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_fksxm"]
+[ext_resource type="Texture2D" uid="uid://c6sfvk0ipnoog" path="res://Assets/extraCreatures/flatwoods.png" id="3_04ayd"]
+[ext_resource type="Texture2D" uid="uid://j534bdn3jkom" path="res://Assets/extraCreatures/dracomachina.png" id="4_kt8ir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsgkn"]
+size = Vector2(26, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jxpvh"]
+load_path = "res://.godot/imported/background-elements.png-9efc8e7669eb7ed92e879ba67ff9b4de.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1boc8"]
+atlas = SubResource("CompressedTexture2D_jxpvh")
+region = Rect2(1097, 1148, 150, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kthru"]
+size = Vector2(151.889, 140.295)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ha55j"]
+load_path = "res://.godot/imported/background-elements.png-9efc8e7669eb7ed92e879ba67ff9b4de.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_friwx"]
+atlas = SubResource("CompressedTexture2D_ha55j")
+region = Rect2(1840, 1974, 155, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_077g0"]
+size = Vector2(576, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vec7l"]
+size = Vector2(65, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84u2v"]
+size = Vector2(42, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxgqy"]
+size = Vector2(41, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3be1"]
+size = Vector2(278, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yd7e6"]
+size = Vector2(215, 53)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_15egb"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxie8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwgdv"]
+size = Vector2(44, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwt6k"]
+size = Vector2(86, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qy42m"]
+size = Vector2(75, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey1yn"]
+size = Vector2(96, 220)
+
+[node name="TownScene" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(544, 360)
+scale = Vector2(0.450886, 0.6)
+texture = ExtResource("1_rbmk5")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_fksxm")]
+y_sort_enabled = true
+position = Vector2(831, 187)
+
+[node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
+zoom = Vector2(1.67, 1.67)
+limit_left = 0
+limit_top = 0
+limit_right = 1080
+limit_bottom = 720
+
+[node name="Buildings" type="Node" parent="."]
+
+[node name="GreenHouseSmolLeftBig" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(396, 163)
+scale = Vector2(9.0391, 10.9191)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GreenHouseSmolLeftBig"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_fsgkn")
+
+[node name="GreenHouseSmolSpr" type="Sprite2D" parent="Buildings/GreenHouseSmolLeftBig"]
+scale = Vector2(0.165687, 0.165687)
+texture = SubResource("AtlasTexture_1boc8")
+flip_h = true
+
+[node name="RedHouseLargLeftBottom" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(373, 689)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargLeftBottom"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargLeftBottom"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+flip_h = true
+
+[node name="RedHouseLargLeftRobot" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(372, 483)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargLeftRobot"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargLeftRobot"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+flip_h = true
+
+[node name="RedHouseLargLeftSkinnyLeft" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(357, 326)
+scale = Vector2(0.68, 1)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargLeftSkinnyLeft"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargLeftSkinnyLeft"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+flip_h = true
+
+[node name="RedHouseLargLeftSkinnyRight" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(448, 326)
+scale = Vector2(0.68, 1)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargLeftSkinnyRight"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargLeftSkinnyRight"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+flip_h = true
+
+[node name="GreenHouseSmolRightBottom" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(866, 661)
+scale = Vector2(5.16949, 5.16949)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GreenHouseSmolRightBottom"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_fsgkn")
+
+[node name="GreenHouseSmolSpr" type="Sprite2D" parent="Buildings/GreenHouseSmolRightBottom"]
+scale = Vector2(0.165687, 0.165687)
+texture = SubResource("AtlasTexture_1boc8")
+
+[node name="GreenHouseSmolRightBigger" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(992, 509)
+scale = Vector2(6.65818, 6.65818)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GreenHouseSmolRightBigger"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_fsgkn")
+
+[node name="GreenHouseSmolSpr" type="Sprite2D" parent="Buildings/GreenHouseSmolRightBigger"]
+scale = Vector2(0.165687, 0.165687)
+texture = SubResource("AtlasTexture_1boc8")
+
+[node name="GreenHouseSmolRightSkinnyRight" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(1022, 359)
+scale = Vector2(3.81818, 6.65818)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GreenHouseSmolRightSkinnyRight"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_fsgkn")
+
+[node name="GreenHouseSmolSpr" type="Sprite2D" parent="Buildings/GreenHouseSmolRightSkinnyRight"]
+scale = Vector2(0.165687, 0.165687)
+texture = SubResource("AtlasTexture_1boc8")
+
+[node name="GreenHouseSmolRightSkinnyLeft" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(919, 360)
+scale = Vector2(3.81818, 6.65818)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GreenHouseSmolRightSkinnyLeft"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_fsgkn")
+
+[node name="GreenHouseSmolSpr" type="Sprite2D" parent="Buildings/GreenHouseSmolRightSkinnyLeft"]
+scale = Vector2(0.165687, 0.165687)
+texture = SubResource("AtlasTexture_1boc8")
+
+[node name="RedHouseLargSkinnyRight" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(858, 502)
+scale = Vector2(0.68, 1)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargSkinnyRight"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargSkinnyRight"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+
+[node name="RedHouseLargRobotBotRight" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(1003, 646)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/RedHouseLargRobotBotRight"]
+scale = Vector2(0.862471, 0.862471)
+shape = SubResource("RectangleShape2D_kthru")
+
+[node name="RedHouseLargSpr" type="Sprite2D" parent="Buildings/RedHouseLargRobotBotRight"]
+scale = Vector2(0.862471, 0.862471)
+texture = SubResource("AtlasTexture_friwx")
+
+[node name="ZoneCollision" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="TopBushesColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(801, 40)
+shape = SubResource("RectangleShape2D_077g0")
+
+[node name="BotLeftHouseGapColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(405.5, 585)
+shape = SubResource("RectangleShape2D_vec7l")
+
+[node name="LeftHouseGapColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(416, 400.5)
+shape = SubResource("RectangleShape2D_84u2v")
+
+[node name="LeftGreenRedGapColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(472.5, 259)
+shape = SubResource("RectangleShape2D_jxgqy")
+
+[node name="BotRightDogHouseColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(952, 589)
+shape = SubResource("RectangleShape2D_g3be1")
+
+[node name="BotRightDogHouseColl2" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(976.5, 429.5)
+shape = SubResource("RectangleShape2D_yd7e6")
+
+[node name="RightLevelColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(1080, 344)
+shape = SubResource("WorldBoundaryShape2D_15egb")
+
+[node name="BotLevelColl" type="CollisionShape2D" parent="ZoneCollision"]
+position = Vector2(621, 702)
+shape = SubResource("WorldBoundaryShape2D_pxie8")
+
+[node name="Flatwoods" type="Node2D" parent="."]
+position = Vector2(489, 511)
+scale = Vector2(1.17421, 1.17421)
+
+[node name="Sprite2D" type="Sprite2D" parent="Flatwoods"]
+texture = ExtResource("3_04ayd")
+
+[node name="Collider" type="StaticBody2D" parent="Flatwoods"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flatwoods/Collider"]
+y_sort_enabled = true
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_qwgdv")
+
+[node name="DialogueDetector" type="Area2D" parent="Flatwoods"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flatwoods/DialogueDetector"]
+position = Vector2(8, 6.5)
+shape = SubResource("RectangleShape2D_rwt6k")
+
+[node name="Dracomachina" type="Node2D" parent="."]
+position = Vector2(765, 622)
+scale = Vector2(1.30433, 1.30433)
+
+[node name="Sprite2D" type="Sprite2D" parent="Dracomachina"]
+scale = Vector2(0.824084, 0.824084)
+texture = ExtResource("4_kt8ir")
+
+[node name="Collider" type="StaticBody2D" parent="Dracomachina"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dracomachina/Collider"]
+y_sort_enabled = true
+position = Vector2(3, 5)
+shape = SubResource("RectangleShape2D_qwgdv")
+
+[node name="DialogueDetector" type="Area2D" parent="Dracomachina"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dracomachina/DialogueDetector"]
+position = Vector2(-5.5, 3.5)
+shape = SubResource("RectangleShape2D_qy42m")
+
+[node name="LevelTransition" type="Area2D" parent="."]
+position = Vector2(1064, 181)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+position = Vector2(-24, 12)
+shape = SubResource("RectangleShape2D_ey1yn")

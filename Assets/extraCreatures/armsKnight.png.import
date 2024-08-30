@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwvgrgrur8ivd"
-path="res://.godot/imported/foxyspritesheet.png-3bbee27be91225759647e2f472079736.ctex"
+uid="uid://il36o8r2a2cx"
+path="res://.godot/imported/armsKnight.png-918224e1c1aac2fcf6857938e2730e24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/foxyspritesheet.png"
-dest_files=["res://.godot/imported/foxyspritesheet.png-3bbee27be91225759647e2f472079736.ctex"]
+source_file="res://Assets/extraCreatures/armsKnight.png"
+dest_files=["res://.godot/imported/armsKnight.png-918224e1c1aac2fcf6857938e2730e24.ctex"]
 
 [params]
 

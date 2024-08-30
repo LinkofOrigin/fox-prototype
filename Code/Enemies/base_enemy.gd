@@ -4,7 +4,7 @@ extends CharacterBody2D
 var target: Node2D = null
 var _is_dying: bool = false # TODO: use state machine
 
-@onready var anim_sprite: AnimatedSprite2D = $FoxyCharAnimSprite
+@onready var animation_player: AnimationPlayer = $EnemyAnimationPlayer
 @onready var hurtbox_collision: CollisionShape2D = $CollisionShape2D
 @onready var attack_component: AttackC = $AttackC
 @onready var attack_area: Area2D = $AttackArea
@@ -18,17 +18,16 @@ func _process(_delta: float):
 func _handle_death():
 	if not _is_dying:
 		_is_dying = true
-		anim_sprite.play("Death")
+		animation_player.play("Death")
 		hurtbox_collision.set_deferred("disabled", true)
 		attack_area.monitoring = false
-		#attack_area.get_node("CollisionShape2D").set_deferred("disabled", true)
 
 
 func _on_health_c_health_reached_zero():
 	_handle_death()
 
 
-func _on_foxy_char_anim_sprite_animation_finished():
+func _on_enemy_animation_player_animation_finished(animation_name: StringName):
 	if _is_dying:
 		queue_free()
 

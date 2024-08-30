@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://demrapithdkhw"
-path="res://.godot/imported/background-elements.png-30f329da2f4b72feb985f5469572448b.ctex"
+uid="uid://c6sfvk0ipnoog"
+path="res://.godot/imported/flatwoods.png-e5c764e18208d6d758629425352a502d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TileMaps/background-elements.png"
-dest_files=["res://.godot/imported/background-elements.png-30f329da2f4b72feb985f5469572448b.ctex"]
+source_file="res://Assets/extraCreatures/flatwoods.png"
+dest_files=["res://.godot/imported/flatwoods.png-e5c764e18208d6d758629425352a502d.ctex"]
 
 [params]
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dbvqt7vb22r"]
+
+[ext_resource type="Texture2D" uid="uid://dd1dlhe4vs7dj" path="res://Assets/Proto1BGs/TestFoxPrototypeEnd.png" id="1_x7gpj"]
+[ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_glr54"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65tqa"]
+size = Vector2(265, 211)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fhby0"]
+
+[node name="EndScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(534, 361)
+scale = Vector2(0.447, 0.603)
+texture = ExtResource("1_x7gpj")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_glr54")]
+position = Vector2(82, 332)
+
+[node name="CutsceneTrigger" type="Area2D" parent="."]
+position = Vector2(526, 348)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
+position = Vector2(1.5, -4.5)
+shape = SubResource("RectangleShape2D_65tqa")
+
+[node name="ZoneWalls" type="StaticBody2D" parent="."]
+
+[node name="BottomColl" type="CollisionShape2D" parent="ZoneWalls"]
+position = Vector2(539, 719)
+shape = SubResource("WorldBoundaryShape2D_fhby0")
+
+[node name="RightColl" type="CollisionShape2D" parent="ZoneWalls"]
+position = Vector2(1080, 293)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_fhby0")
+
+[node name="TopColl" type="CollisionShape2D" parent="ZoneWalls"]
+position = Vector2(576, 0)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_fhby0")
+
+[node name="LeftColl" type="CollisionShape2D" parent="ZoneWalls"]
+position = Vector2(0, 339)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_fhby0")
