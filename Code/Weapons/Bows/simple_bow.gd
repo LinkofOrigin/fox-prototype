@@ -35,8 +35,9 @@ func play_fidget():
 
 
 func nock_new_arrow():
+	print("nocking arrow")
 	var new_arrow: BaseArrow = BaseArrowPackedScene.instantiate()
-	_arrow_marker.add_child(new_arrow)
+	add_child(new_arrow)
 	curr_arrow = new_arrow
 
 

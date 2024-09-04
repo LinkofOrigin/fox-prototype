@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://cemvuj0vxpwsc"]
+
+[ext_resource type="Texture2D" uid="uid://b0pcq7rm0k8ow" path="res://Assets/Spritesheets/adventure-ui.png" id="1_ji0o0"]
+[ext_resource type="Script" path="res://Code/UI/Dialogue/actor_text_panel.gd" id="1_xmx27"]
+[ext_resource type="PackedScene" uid="uid://ct8dhi2jrducb" path="res://UI/Dialogue/textbox_cont.tscn" id="2_30cuy"]
+[ext_resource type="Texture2D" uid="uid://dcq10akqgb6d6" path="res://icon.svg" id="3_ani46"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngq24"]
+atlas = ExtResource("1_ji0o0")
+region = Rect2(992, 1024, 96, 128)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qp24e"]
+texture = ExtResource("3_ani46")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bci53"]
+texture = ExtResource("3_ani46")
+
+[node name="ActorTextPanel" type="Control"]
+texture_filter = 2
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_xmx27")
+
+[node name="LeftPortrait" type="TextureRect" parent="."]
+layout_mode = 2
+offset_top = -234.0
+offset_right = 96.0
+offset_bottom = -106.0
+texture = SubResource("AtlasTexture_ngq24")
+
+[node name="CenterContainer" type="CenterContainer" parent="LeftPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 38.0
+offset_right = -16.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPortraitPanel" type="Panel" parent="LeftPortrait/CenterContainer"]
+unique_name_in_owner = true
+texture_filter = 3
+custom_minimum_size = Vector2(53, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qp24e")
+
+[node name="RightPortrait" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 703.0
+offset_top = -234.0
+offset_right = 799.0
+offset_bottom = -106.0
+texture = SubResource("AtlasTexture_ngq24")
+
+[node name="CenterContainer" type="CenterContainer" parent="RightPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 38.0
+offset_right = -16.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightPortraitPanel" type="Panel" parent="RightPortrait/CenterContainer"]
+unique_name_in_owner = true
+texture_filter = 3
+custom_minimum_size = Vector2(53, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bci53")
+
+[node name="TextboxCont" parent="." instance=ExtResource("2_30cuy")]
+layout_mode = 0
+offset_top = -136.0
+offset_right = 800.0
+offset_bottom = -8.0

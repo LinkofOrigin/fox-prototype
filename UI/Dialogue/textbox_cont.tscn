@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://ct8dhi2jrducb"]
+
+[ext_resource type="Script" path="res://Code/UI/Dialogue/textbox_cont.gd" id="1_0qetl"]
+[ext_resource type="Texture2D" uid="uid://b0pcq7rm0k8ow" path="res://Assets/Spritesheets/adventure-ui.png" id="1_cmro1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kojas"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(768, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsupc"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(784, 128, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2ljr"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(880, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyqbn"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(768, 144, 16, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jah0q"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(784, 144, 96, 96)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ed2v"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_mdl60"]
+line_spacing = 0.0
+font_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shadow_color = Color(0.278431, 0.278431, 0.278431, 0.117647)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_440te"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(880, 144, 16, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2dhl"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(768, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d12yc"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(784, 240, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ernbb"]
+atlas = ExtResource("1_cmro1")
+region = Rect2(880, 240, 16, 16)
+
+[node name="TextboxCont" type="VBoxContainer"]
+offset_right = 342.0
+offset_bottom = 128.0
+theme_override_constants/separation = 0
+script = ExtResource("1_0qetl")
+
+[node name="TopBorders" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TopLeftCorner" type="TextureRect" parent="TopBorders"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kojas")
+
+[node name="TopBorder" type="TextureRect" parent="TopBorders"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_vsupc")
+stretch_mode = 1
+
+[node name="TopRightCorner" type="TextureRect" parent="TopBorders"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_g2ljr")
+stretch_mode = 1
+
+[node name="MiddleContent" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftBorder" type="TextureRect" parent="MiddleContent"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_pyqbn")
+
+[node name="MiddleCanvas" type="TextureRect" parent="MiddleContent"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_jah0q")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="MiddleContent/MiddleCanvas"]
+unique_name_in_owner = true
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4ed2v")
+text = "Lorem ipsum odor amet, consectetuer adipiscing elit. Malesuada quis viverra cursus elit blandit malesuada varius. Vehicula turpis taciti mollis nisl pharetra feugiat velit lacus. Apellentesque etiam dignissim varius pretium primis potenti commodo. Duis eget pharetra mollis semper eleifend mauris vivamus odio. Vel sed luctus convallis egestas accumsan sapien. Sem pulvinar non inceptos lobortis nisi; luctus sapien euismod. Finibus conubia erat fermentum, pellentesque venenatis inceptos montes. Ac habitant dis at tristique varius hac class. Sapien ligula rutrum euismod, in ultricies maecenas primis."
+label_settings = SubResource("LabelSettings_mdl60")
+autowrap_mode = 3
+text_overrun_behavior = 1
+
+[node name="RightBorder" type="TextureRect" parent="MiddleContent"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_440te")
+
+[node name="BottomBorders" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BottomLeftCorner" type="TextureRect" parent="BottomBorders"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_d2dhl")
+
+[node name="BottomBorder" type="TextureRect" parent="BottomBorders"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_d12yc")
+stretch_mode = 1
+
+[node name="BottomRightCorner" type="TextureRect" parent="BottomBorders"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ernbb")

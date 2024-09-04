@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckb44bjtv738r"]
+
+[ext_resource type="Script" path="res://Code/UI/Dialogue/dialogue_base.gd" id="1_lqvmu"]
+[ext_resource type="PackedScene" uid="uid://cemvuj0vxpwsc" path="res://UI/Dialogue/actor_text_panel.tscn" id="1_p14nt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcw2k"]
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.133333)
+corner_detail = 1
+
+[node name="DialogueBase" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_lqvmu")
+metadata/_edit_use_anchors_ = true
+
+[node name="OpaquePanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jcw2k")
+
+[node name="ActorTextPanel" parent="OpaquePanel" instance=ExtResource("1_p14nt")]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 140.0
+offset_top = 711.0
+offset_right = 140.0
+offset_bottom = 711.0

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3 uid="uid://bw2qjhlicfebl"]
+
+[ext_resource type="Script" path="res://Code/Resources/dialogue_resource.gd" id="1_wbmr4"]
+
+[resource]
+script = ExtResource("1_wbmr4")
+dialogue_entries = Array[Dictionary]([{}])

@@ -1,10 +1,24 @@
 class_name CutsceneResource
 extends Resource
 
-signal cutscene_started
-signal cutscene_ended
 
-func play_cutscene():
-	pass
+signal player_pressed_to_progress
 
-#func 
+
+var cutscene_steps: Array:
+	set = set_cutscene_steps,
+	get = get_cutscene_steps
+var dialogue_base: DialogueBase:
+	set = set_dialogue_base
+
+
+func set_cutscene_steps(full_steps: Array):
+	cutscene_steps = full_steps
+
+
+func get_cutscene_steps() -> Array:
+	return cutscene_steps
+
+
+func set_dialogue_base(new_dialogue_base: DialogueBase):
+	dialogue_base = new_dialogue_base

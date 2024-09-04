@@ -14,7 +14,6 @@ func _ready():
 
 
 func _physics_process(delta: float):
-	#print("arrow flying: ", self, " | aimed at: ", trajectory)
 	look_at(global_position + trajectory)
 	global_translate(trajectory * movement_resource.speed * delta)
 

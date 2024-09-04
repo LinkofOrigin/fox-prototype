@@ -3,13 +3,16 @@ class_name PlayerControllerC
 extends Node
 
 var bow: SimpleBow
-
-@onready var movement_component: MovementComponent
+var movement_component: MovementComponent
+var is_in_cutscene: bool = false
 
 
 func _ready():
-	movement_component = _find_movement_comp()
-	bow = _find_bow_comp()
+	if not Engine.is_editor_hint():
+		CutsceneManager.cutscene_started.connect(_on_cutscene_started)
+		CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
+		movement_component = _find_movement_comp()
+		bow = _find_bow_comp()
 
 
 func _process(_delta):
@@ -25,6 +28,9 @@ func _process(_delta):
 func _unhandled_input(event: InputEvent):
 	# GAME LOGIC
 	if not Engine.is_editor_hint():
+		if is_in_cutscene:
+			return
+		
 		# Basic movement
 		if movement_component != null:
 			var current_direction = Input.get_vector(
@@ -95,4 +101,12 @@ func _get_configuration_warnings() -> PackedStringArray:
 func _on_health_c_health_reached_zero():
 	# TODO: Trigger game over or something
 	print("Player died!")
-	pass # Replace with function body.
+
+
+func _on_cutscene_started():
+	is_in_cutscene = true
+	movement_component.stop_moving()
+
+
+func _on_cutscene_ended():
+	set_deferred("is_in_cutscene", false)
