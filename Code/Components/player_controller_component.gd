@@ -20,7 +20,7 @@ func _process(_delta):
 	if Engine.is_editor_hint():
 		update_configuration_warnings()
 	
-	# GAME LOGIC
+	# GAME ONLY LOGIC
 	else:
 		pass
 
@@ -49,7 +49,8 @@ func _unhandled_input(event: InputEvent):
 				#       EG. When a target/lock-on system is created
 				var target_direction: Vector2
 				if event is InputEventMouseButton and event.is_released():
-					target_direction = bow.curr_arrow.global_position.direction_to(event.position)
+					if is_instance_valid(bow.curr_arrow):
+						target_direction = bow.curr_arrow.global_position.direction_to(event.position)
 				elif event is InputEventJoypadMotion:
 					target_direction = Input.get_vector(
 							InputActions.RightJoystick.LEFT,

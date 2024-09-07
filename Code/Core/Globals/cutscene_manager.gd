@@ -27,14 +27,15 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 	if cutscene_resource != null:
 		set_cutscene_data(cutscene_resource)
 	
-	_cutscene_is_playing = true
 	cutscene_started.emit()
+	_cutscene_is_playing = true
 	
 	_current_resource.dialogue_base.display_dialogue()
 	var original_camera: Camera2D = get_viewport().get_camera_2d()
 	_camera = original_camera.duplicate()
 	add_child(_camera)
 	_camera.make_current()
+	_camera.position = original_camera.get_screen_center_position()
 	var player: Node2D = get_tree().get_first_node_in_group("Player")
 	
 	for cutscene_step: Dictionary in _current_resource.get_cutscene_steps():
@@ -56,7 +57,7 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 		
 		# Camera stuff
 		if cutscene_step.has("camera_pos"):
-			if cutscene_step["camera_pos"] == "player_pos":
+			if typeof(cutscene_step["camera_pos"]) == TYPE_STRING and cutscene_step["camera_pos"] == "player_pos":
 				_camera.position = player.global_position
 		if cutscene_step.has("camera_pan") and cutscene_step.has("camera_time"):
 			var target_position = cutscene_step["camera_pan"]

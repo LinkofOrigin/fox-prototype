@@ -5,11 +5,11 @@ signal arrow_hit_body(body)
 
 @export var movement_resource: MovementResource
 @export var damage_resource: DamageResource
-
 var trajectory: Vector2
 
 
 func _ready():
+	name = "BaseArrow"
 	set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 
@@ -37,4 +37,5 @@ func _on_body_entered(body: Node2D):
 # Signal - if the arrow leaves the screen, remove it
 # TODO: Any logic needed for if an arrow hits something off screen? Maybe don't delete it?
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+	if not process_mode == Node.PROCESS_MODE_DISABLED:
+		queue_free()

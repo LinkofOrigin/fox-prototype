@@ -1,43 +1,37 @@
 extends Node
 ## A large global class for managing "Sequences"
-## A Sequence represents an indivudal and overall state of the game. Beating a key boss,
+## A Sequence represents an individual and overall state of the game. Beating a key boss,
 ## visiting a town for the first time, and acquiring an important item could all trigger
-## an update of the current Sequence.
+## an update of a Sequence.
 
-var global_sequence_resource: GlobalSequenceResource = preload("res://Resources/Sequences/global_sequence_resource.tres")
-var current_local_sequence: LocalSequence
-var _current_sequence: int = 0:
-	get = get_current_sequence
+# TODO: Eventually all sequence logic could be separated from level scenes and run off of signals
+# - Downside: level code and logic isn't clearly tied to sequence updates and requires multiple files open just to work in
+# - Although... Might be finding a way to mitigate that... or not...
+var GlobalSequenceResource = preload("res://Resources/Sequences/global_sequence_resource.tres")
 
 
 func _ready():
-	GlobalSignals.local_sequence_loaded.connect(_on_local_sequence_loaded)
-	GlobalSignals.local_sequence_updated.connect(_on_local_sequence_updated)
+	#GlobalSignals.sequence_state_loaded.connect(_on_sequence_state_loaded)
+	GlobalSignals.sequence_state_updated.connect(_on_sequence_state_updated)
+	GlobalSignals.sequence_state_unloading.connect(_on_sequence_state_unloading)
 
 
-func load_local_sequence(sequence_id: String):
-	return global_sequence_resource.load_local_sequence(sequence_id)
-	
-
-
-func get_current_sequence():
-	return _current_sequence
-
-
-func update_current_sequence(local_sequence):
-	current_local_sequence = local_sequence
-	#global_sequence_resource.save_local_sequence(local_sequence)
+func load_sequence_state(sequence_id: String) -> Dictionary:
+	return GlobalSequenceResource.load_sequence_state(sequence_id)
 
 
 func _handle_test_signal():
 	print("test signal!")
 
 
-func _on_local_sequence_updated(local_sequence: LocalSequence):
-	print("Manager- A local sequence updated! ", local_sequence)
-	update_current_sequence(local_sequence)
+func _on_sequence_state_updated(sequence_state: SequenceState):
+	print("Sequence Manager - A local sequence updated! ", sequence_state)
+	GlobalSequenceResource.save_local_sequence(sequence_state)
 
 
-func _on_local_sequence_loaded(local_sequence: LocalSequence):
-	global_sequence_resource.save_local_sequence(current_local_sequence)
-	current_local_sequence = local_sequence
+func _on_sequence_state_loaded(sequence_state: SequenceState):
+	print("sequence loaded! ", sequence_state)
+
+
+func _on_sequence_state_unloading(sequence_state: SequenceState):
+	GlobalSequenceResource.save_local_sequence(sequence_state)

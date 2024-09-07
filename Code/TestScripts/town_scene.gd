@@ -5,6 +5,7 @@ extends Node2D
 @onready var dialogue_base: DialogueBase = $DialogueBase
 @onready var cutscene_resource: CutsceneResource = preload("res://Resources/Cutscenes/cutscene_resource.tres")
 
+var sequence := SequenceStateStorage.Town
 var _player_portrait: Texture2D = preload("res://Assets/Sprites/FoxPortrait.png")
 var _flatwoods_portrait: Texture2D = preload("res://Assets/Sprites/FlatwoodsPortrait.png")
 var _draco_portrait: Texture2D = preload("res://Assets/Sprites/DracoPortrait.png")
@@ -15,8 +16,10 @@ var _repeat_cutscene_lockout_counter: int = 0
 var _repeat_cutscene_lockout_frames: int = 5
 var _repeat_cutscene_lockout: bool = false
 
+
 func _ready():
 	# TODO: Handle loading different scenario state
+	_resolve_current_state()
 	dialogue_base.set_left_portrait(_player_portrait)
 	cutscene_resource.set_dialogue_base(dialogue_base)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
@@ -30,18 +33,64 @@ func _process(delta: float):
 			_repeat_cutscene_lockout_counter = 0
 
 
-func _get_flatwoods_cutscene_steps():
-	return [
-		{"display_dialogue": true, "portrait": 1, "text": "I hope the corruption doesn’t reach us here…"},
-		{"display_dialogue": true, "portrait": 0, "text": "I didn't realize it was getting so close. I need to act soon"}
-	]
+func _resolve_current_state():
+	var combat_sequence = SequenceStateStorage.Combat
+	if combat_sequence.get_state_value(combat_sequence.States.ENEMIES_DEFEATED):
+		sequence.update_state_value(sequence.States.AFTER_ENEMIES_DEFEATED, true)
 
 
-func _get_draco_cutscene_steps():
-	return [
-		{"display_dialogue": true, "portrait": 1, "text": "Help! Monsters invade from the East!"},
-		{"display_dialogue": true, "portrait": 0, "text": "East! I'll head there now!"}
-	]
+func _get_flatwoods_cutscene_steps() -> Array[Dictionary]:
+	if not sequence.get_state_value(sequence.States.AFTER_ENEMIES_DEFEATED):
+		return [
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 1,
+				"text": "I hope the corruption doesn’t reach us here…"
+			},
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 0,
+				"text": "I didn't realize it was getting so close. I need to act soon"
+			}
+		]
+	else:
+		return [
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 1,
+				"text": "It’s close, I can feel it…"
+			}
+		]
+
+
+func _get_draco_cutscene_steps() -> Array[Dictionary]:
+	if not sequence.get_state_value(sequence.States.AFTER_ENEMIES_DEFEATED):
+		return [
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 1,
+				"text": "Help! Monsters invade from the East!"
+			},
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 0,
+				"text": "East! I'll head there now!"
+			}
+		]
+	else:
+		return [
+			{
+				"display_dialogue": true,
+				"camera_pos": "player_pos",
+				"portrait": 1,
+				"text": "Thank you for saving us!"
+			}
+		]
 
 
 func _on_flatwoods_dialogue_detector_body_entered(body):

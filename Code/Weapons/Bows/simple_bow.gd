@@ -7,8 +7,7 @@ const ANIMATIONS: Dictionary = { IDLE = "Idle", IDLEFIDGET = "IdleFidget", DRAW 
 var curr_state: States = States.IDLE
 var curr_arrow: BaseArrow
 
-@onready var _arrow_marker: Marker2D = $ArrowRoot
-const BaseArrowPackedScene: PackedScene = preload("res://Weapons/Arrows/base_arrow.tscn")
+const BaseArrow: PackedScene = preload("res://Weapons/Arrows/base_arrow.tscn")
 
 
 func _ready():
@@ -25,7 +24,7 @@ func fire_arrow(target_direction: Vector2):
 	play(ANIMATIONS.FIRE)
 	curr_state = States.FIRE
 	if curr_arrow != null:
-		curr_arrow.enable_and_fly(target_direction, _arrow_marker.global_position)
+		curr_arrow.enable_and_fly(target_direction, $ArrowRoot.global_position)
 		curr_arrow = null # release the ref
 
 
@@ -35,9 +34,8 @@ func play_fidget():
 
 
 func nock_new_arrow():
-	print("nocking arrow")
-	var new_arrow: BaseArrow = BaseArrowPackedScene.instantiate()
-	add_child(new_arrow)
+	var new_arrow = BaseArrow.instantiate()
+	$ArrowRoot.add_child(new_arrow)
 	curr_arrow = new_arrow
 
 
