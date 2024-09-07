@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://buqyklgjm3230"]
+[gd_scene load_steps=24 format=3 uid="uid://buqyklgjm3230"]
 
 [ext_resource type="Texture2D" uid="uid://beqsvcy1gy21e" path="res://Assets/fox-anim/fox_attack.png" id="1_pknyf"]
 [ext_resource type="Texture2D" uid="uid://b6108v2cjpdin" path="res://Assets/fox-anim/fox_walk.png" id="2_4d4yu"]
+[ext_resource type="Texture2D" uid="uid://wjp6sg0q15x" path="res://Assets/fox-anim/fox_death.png" id="3_edqiv"]
 [ext_resource type="Texture2D" uid="uid://crjehieyfjxk7" path="res://Assets/fox-anim/fox_idle.png" id="3_pnd4a"]
 [ext_resource type="Texture2D" uid="uid://cq7sajfjdhali" path="res://Assets/fox-anim/fox_hit.png" id="4_p6hw5"]
 
@@ -20,6 +21,18 @@ region = Rect2(640, 0, 80, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ki1f0"]
 atlas = ExtResource("2_4d4yu")
 region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn7j2"]
+atlas = ExtResource("3_edqiv")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuovw"]
+atlas = ExtResource("3_edqiv")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mlpw"]
+atlas = ExtResource("3_edqiv")
+region = Rect2(160, 0, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tav3v"]
 atlas = ExtResource("3_pnd4a")
@@ -78,6 +91,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 25.0,
+"texture": SubResource("AtlasTexture_mn7j2")
+}, {
+"duration": 25.0,
+"texture": SubResource("AtlasTexture_tuovw")
+}, {
+"duration": 25.0,
+"texture": SubResource("AtlasTexture_4mlpw")
+}],
+"loop": false,
+"name": &"Death",
 "speed": 60.0
 }, {
 "frames": [{

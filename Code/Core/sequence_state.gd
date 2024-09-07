@@ -1,8 +1,6 @@
 class_name SequenceState
 extends Node
 
-signal sequence_state_updated()
-
 var id: String
 
 var _triggers: Array[SequenceTriggerResource]

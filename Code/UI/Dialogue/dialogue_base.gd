@@ -24,6 +24,10 @@ func hide_dialogue():
 	visible = false
 
 
+func show_no_portrait_with_text(new_text: String):
+	actor_text_panel.use_no_portrait_with_text(new_text)
+
+
 func show_left_portrait_with_text(new_text: String):
 	actor_text_panel.use_left_portrait_with_text(new_text)
 

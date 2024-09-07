@@ -27,7 +27,7 @@ func _on_health_c_health_reached_zero():
 	_handle_death()
 
 
-func _on_enemy_animation_player_animation_finished(animation_name: StringName):
+func _on_enemy_animation_player_animation_finished(_animation_name: StringName):
 	if _is_dying:
 		queue_free()
 

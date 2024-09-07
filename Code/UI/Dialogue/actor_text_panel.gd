@@ -21,7 +21,7 @@ func _ready():
 	right_portrait.visible = false
 
 
-func _process(delta: float):
+func _process(_delta: float):
 	if _is_input_locked:
 		_current_lockout_counter += 1
 		if _current_lockout_counter >= _input_lockout_frames:
@@ -36,6 +36,12 @@ func enable_text_mode():
 
 func disable_text_mode():
 	_in_text_mode = false
+
+
+func use_no_portrait_with_text(new_text: String):
+	right_portrait.visible = false
+	left_portrait.visible = false
+	set_text_content(new_text)
 
 
 func use_left_portrait_with_text(new_text: String):
@@ -62,7 +68,7 @@ func set_text_content(new_text: String):
 	textbox.set_text_content(new_text)
 
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	if _in_text_mode and not _is_input_locked and Input.is_action_just_released("ProgressDialogue"):
 		_is_input_locked = true
 		player_progressed_dialogue.emit()

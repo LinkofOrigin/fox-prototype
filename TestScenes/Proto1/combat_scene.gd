@@ -1,11 +1,9 @@
-extends Node2D
+extends LevelSceneWithSequence
 
 
 var sequence := SequenceStateStorage.Combat # TODO: Can this be moved to JSON file? Not if we want to reference it via code (unless @tool?)
 const Proto1Enemy: PackedScene = preload("res://Enemies/proto1_enemy.tscn")
 const Proto1Boss: PackedScene = preload("res://Enemies/proto1_boss.tscn")
-@onready var dialogue_base: DialogueBase = preload("res://UI/Dialogue/dialogue_base.tscn").instantiate()
-
 
 var _actively_fighting_enemies: bool = false
 var _actively_fighting_boss: bool = false
@@ -16,9 +14,12 @@ const _knight_portrait: Texture2D = preload("res://Assets/extraCreatures/armsKni
 
 func _ready():
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
-	add_child(dialogue_base)
 	
-	# TODO: Set player location based on previous location (global state/sequence? probly)
+	var player: Node2D = get_tree().get_first_node_in_group("Player")
+	if SceneManager.get_last_scene() == SceneManager.Scenes.TOWN:
+		player.global_position = $PlayerSpawns/PlayerSpawnLeft.global_position
+	elif SceneManager.get_last_scene() == SceneManager.Scenes.END:
+		player.global_position = $PlayerSpawns/PlayerSpawnRight.global_position
 	
 	if not sequence.get_state_value(sequence.States.ENEMIES_DEFEATED):
 		_load_enemies()
@@ -36,12 +37,12 @@ func _ready():
 		$RightTransition.body_entered.connect(_on_right_transition_body_entered)
 
 
+func get_scene_id() -> SceneManager.Scenes:
+	return SceneManager.Scenes.COMBAT
+
+
 func _run_opening_cutscene():
-	dialogue_base.set_left_portrait(_player_portrait)
-	dialogue_base.set_right_portrait(_squid_portrait)
-	
 	var cutscene_resource = CutsceneResource.new()
-	cutscene_resource.set_dialogue_base(dialogue_base)
 	
 	cutscene_resource.set_cutscene_steps([
 			# Hold camera on player for X time
@@ -62,6 +63,7 @@ func _run_opening_cutscene():
 			{
 				"display_dialogue": true,
 				"portrait": 1,
+				"dialogue_portrait_right": _squid_portrait,
 				"text": "GrAahhahaFHfgha",
 			},
 			# Hide dialogue and pan camera back to player
@@ -74,6 +76,7 @@ func _run_opening_cutscene():
 			{
 				"display_dialogue": true,
 				"portrait": 0,
+				"dialogue_portrait_left": _player_portrait,
 				"text": "Gotta clean out these baddies to keep the town safe!",
 			},
 			# On dismissal, release; cutscene is over
@@ -104,44 +107,39 @@ func _run_enemies_defeated_cutscene():
 
 
 func _run_boss_opening_cutscene():
-	dialogue_base.set_left_portrait(_player_portrait)
-	dialogue_base.set_right_portrait(_knight_portrait)
-	
 	var cutscene_resource := CutsceneResource.new()
-	cutscene_resource.set_dialogue_base(dialogue_base)
 	cutscene_resource.set_cutscene_steps([
 			# Start camera on boss enemy
 			{
-				"camera_pos": %BossSpawn,
-				"wait_time": .2,
+				"camera_pos": %BossSpawn.global_position,
+				"wait_time": 1,
 			},
 			# Display dialogue for boss
 			{
 				"display_dialogue": true,
 				"portrait": 1,
+				"dialogue_portrait_right": _knight_portrait,
 				"text": "This town will be razed to nothing!",
 			},
 			# Pan camera to player and show player dialogue
 			{
-				"display_dialogue": true,
-				"portrait": 0,
-				"text": "No! I'll finish you, and then I'll end this all for good!",
 				"camera_pan": "player_pos",
 				"camera_time": 2,
+				"display_dialogue": true,
+				"portrait": 0,
+				"dialogue_portrait_left": _player_portrait,
+				"text": "No! I'll finish you, and then I'll end this all for good!",
 			},
-	])
+			])
 	CutsceneManager.play_cutscene(cutscene_resource)
 
+
 func _load_boss():
-	var boss_spawn = _get_boss_spawn()
+	var boss_spawn = %BossSpawn
 	var boss = Proto1Boss.instantiate()
 	boss.global_position = boss_spawn.global_position
 	$EnemyStorage.add_child(boss)
 	boss.tree_exited.connect(_on_enemy_death)
-
-
-func _get_boss_spawn() -> Marker2D:
-	return %BossSpawn
 
 
 func _run_boss_defeated_cutscene():
@@ -177,9 +175,10 @@ func _on_cutscene_ended():
 	# TODO: huh?
 	pass
 
-func _on_left_transition_body_entered(_body):
+
+func _on_left_transition_body_entered(_body: Node2D):
 	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/town_scene.tscn")
 
 
-func _on_right_transition_body_entered(_body):
+func _on_right_transition_body_entered(_body: Node2D):
 	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/end_scene.tscn")

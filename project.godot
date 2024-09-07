@@ -22,6 +22,11 @@ GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
 SequenceTriggerFactory="*res://Code/Core/Globals/sequence_trigger_factory.gd"
 CutsceneManager="*res://Code/Core/Globals/cutscene_manager.gd"
 SequenceStateStorage="*res://Code/Resources/sequence_state_storage.gd"
+SceneManager="*res://Code/Core/Globals/scene_manager.gd"
+
+[debug]
+
+gdscript/warnings/shadowed_global_identifier=0
 
 [display]
 

@@ -7,7 +7,7 @@ const ANIMATIONS: Dictionary = { IDLE = "Idle", IDLEFIDGET = "IdleFidget", DRAW 
 var curr_state: States = States.IDLE
 var curr_arrow: BaseArrow
 
-const BaseArrow: PackedScene = preload("res://Weapons/Arrows/base_arrow.tscn")
+const BaseArrow := preload("res://Weapons/Arrows/base_arrow.tscn")
 
 
 func _ready():

@@ -3,9 +3,9 @@ extends Node
 @warning_ignore("unused_signal")
 signal test_signal
 @warning_ignore("unused_signal")
-signal sequence_state_loaded(sequence_state: SequenceState)
+signal scene_loading(loading_scene: SceneManager.Scenes)
 @warning_ignore("unused_signal")
-signal sequence_state_unloading(sequence_state: SequenceState)
+signal scene_unloading(unloading_scene: SceneManager.Scenes)
 @warning_ignore("unused_signal")
 signal sequence_state_updated(new_sequence: SequenceState)
 @warning_ignore("unused_signal")

@@ -107,7 +107,6 @@ shape = SubResource("WorldBoundaryShape2D_sw1ah")
 position = Vector2(160, 132)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
-unique_name_in_owner = true
 zoom = Vector2(1.67, 1.67)
 limit_left = 0
 limit_top = 0

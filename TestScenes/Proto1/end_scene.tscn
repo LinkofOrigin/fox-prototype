@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_glr54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65tqa"]
-size = Vector2(265, 211)
+size = Vector2(104, 138)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fhby0"]
 
@@ -21,13 +21,22 @@ scale = Vector2(0.447, 0.603)
 texture = ExtResource("1_x7gpj")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_glr54")]
-position = Vector2(242, 332)
+position = Vector2(78, 332)
+
+[node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
+zoom = Vector2(1.67, 1.67)
+limit_left = 0
+limit_top = 0
+limit_right = 1080
+limit_bottom = 720
 
 [node name="CutsceneTrigger" type="Area2D" parent="."]
 position = Vector2(526, 348)
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
-position = Vector2(1.5, -4.5)
+position = Vector2(-2, -1)
 shape = SubResource("RectangleShape2D_65tqa")
 
 [node name="ZoneWalls" type="StaticBody2D" parent="."]
@@ -60,4 +69,5 @@ collision_mask = 4
 position = Vector2(11, -4.5)
 shape = SubResource("RectangleShape2D_5hxy6")
 
+[connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_trigger_body_entered"]
 [connection signal="body_entered" from="LeftTransition" to="." method="_on_left_transition_body_entered"]
