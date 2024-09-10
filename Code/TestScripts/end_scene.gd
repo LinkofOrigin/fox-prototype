@@ -1,12 +1,19 @@
 extends Node2D
 
+
 const _player_portrait: Texture2D = preload("res://Assets/Sprites/FoxPortrait.png")
 const _entity_portrait: Texture2D = preload("res://Assets/Sprites/HellhandsPortrait.png")
+
+var end_cutscene_playing: bool = false
+
+
+func _ready():
+	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
 
 
 func _play_end_cutscene():
 	var cutscene_resource = CutsceneResource.new()
-	
+	end_cutscene_playing = true
 	cutscene_resource.set_cutscene_steps([
 			{
 				"wait_time": 2,
@@ -75,3 +82,12 @@ func _on_left_transition_body_entered(_body: Node2D):
 
 func _on_cutscene_trigger_body_entered(_body: Node2D):
 	_play_end_cutscene()
+
+
+func _on_cutscene_ended():
+	if end_cutscene_playing:
+		_load_game_over()
+
+
+func _load_game_over():
+	SceneManager.switch_to_scene(SceneManager.Scenes.GAME_OVER)

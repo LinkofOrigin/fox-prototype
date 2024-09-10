@@ -1,6 +1,7 @@
 class_name SequenceState
 extends Node
 
+
 var id: String
 
 var _triggers: Array[SequenceTriggerResource]
@@ -28,6 +29,10 @@ func update_state_value(key: Variant, value: Variant):
 func add_sequence_trigger(trigger_signal: Signal, trigger_callback: Callable):
 	var new_sequence_trigger = SequenceTriggerFactory.create_new_trigger(trigger_signal, trigger_callback)
 	_triggers.push_back(new_sequence_trigger)
+
+
+func reset_to_initial_state():
+	_init()
 
 
 func _set_state(state: Dictionary):

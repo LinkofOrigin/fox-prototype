@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var flatwoods: Node2D = %Flatwoods
 @onready var draco: Node2D = %Dracomachina
 @onready var cutscene_resource: CutsceneResource = preload("res://Resources/Cutscenes/cutscene_resource.tres")
@@ -16,7 +17,6 @@ var _repeat_cutscene_lockout: bool = false
 
 
 func _ready():
-	# TODO: Handle loading different scenario state
 	_resolve_current_state()
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
 

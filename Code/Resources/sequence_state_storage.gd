@@ -1,8 +1,15 @@
 extends Node
 
+
 var Town := TownSequence.new()
 var Combat := CombatSequence.new()
 var End := EndSequence.new()
+
+
+func reset_all_sequences():
+	Town.reset_to_initial_state()
+	Combat.reset_to_initial_state()
+	End.reset_to_initial_state()
 
 
 class TownSequence extends SequenceState:
@@ -34,6 +41,6 @@ class EndSequence extends SequenceState:
 	
 	func _init():
 		_state = {
-			States.CUTSCENE_WATCHED: false
+			States.CUTSCENE_WATCHED: false,
 		}
 		id = _id

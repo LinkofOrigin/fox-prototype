@@ -2,11 +2,14 @@ extends Control
 
 
 func _on_try_again_button_pressed():
-	pass # Replace with function body.
+	# TODO: Get the current scene and reload the starting state
+	SceneManager.switch_to_last_scene()
 
 
 func _on_restart_button_pressed():
-	pass # Replace with function body.
+	# TODO: Reset game state
+	SequenceStateStorage.reset_all_sequences()
+	SceneManager.switch_to_scene(SceneManager.Scenes.TOWN)
 
 
 func _on_title_screen_button_pressed():
