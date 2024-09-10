@@ -1,11 +1,7 @@
-extends LevelSceneWithSequence
+extends Node2D
 
 const _player_portrait: Texture2D = preload("res://Assets/Sprites/FoxPortrait.png")
 const _entity_portrait: Texture2D = preload("res://Assets/Sprites/HellhandsPortrait.png")
-
-
-func get_scene_id() -> SceneManager.Scenes:
-	return SceneManager.Scenes.END
 
 
 func _play_end_cutscene():
@@ -74,7 +70,7 @@ func _play_end_cutscene():
 
 
 func _on_left_transition_body_entered(_body: Node2D):
-	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/combat_scene.tscn")
+	SceneManager.switch_to_scene(SceneManager.Scenes.COMBAT)
 
 
 func _on_cutscene_trigger_body_entered(_body: Node2D):

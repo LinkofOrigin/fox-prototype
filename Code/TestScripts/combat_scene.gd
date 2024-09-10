@@ -1,4 +1,4 @@
-extends LevelSceneWithSequence
+extends Node2D
 
 
 var sequence := SequenceStateStorage.Combat # TODO: Can this be moved to JSON file? Not if we want to reference it via code (unless @tool?)
@@ -35,10 +35,6 @@ func _ready():
 		_run_boss_opening_cutscene()
 	elif sequence.get_state_value(sequence.States.BOSS_DEFEATED):
 		$RightTransition.body_entered.connect(_on_right_transition_body_entered)
-
-
-func get_scene_id() -> SceneManager.Scenes:
-	return SceneManager.Scenes.COMBAT
 
 
 func _run_opening_cutscene():
@@ -177,8 +173,8 @@ func _on_cutscene_ended():
 
 
 func _on_left_transition_body_entered(_body: Node2D):
-	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/town_scene.tscn")
+	SceneManager.switch_to_scene(SceneManager.Scenes.TOWN)
 
 
 func _on_right_transition_body_entered(_body: Node2D):
-	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/end_scene.tscn")
+	SceneManager.switch_to_scene(SceneManager.Scenes.END)

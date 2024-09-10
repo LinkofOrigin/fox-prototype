@@ -1,4 +1,4 @@
-extends LevelSceneWithSequence
+extends Node2D
 
 @onready var flatwoods: Node2D = %Flatwoods
 @onready var draco: Node2D = %Dracomachina
@@ -27,10 +27,6 @@ func _process(_delta: float):
 		if _repeat_cutscene_lockout_counter >= _repeat_cutscene_lockout_frames:
 			_repeat_cutscene_lockout = false
 			_repeat_cutscene_lockout_counter = 0
-
-
-func get_scene_id() -> SceneManager.Scenes:
-	return SceneManager.Scenes.TOWN
 
 
 func _resolve_current_state():
@@ -132,4 +128,4 @@ func _on_cutscene_ended():
 
 
 func _on_level_transition_body_entered(_body: Node2D):
-	get_tree().change_scene_to_file.call_deferred("res://TestScenes/Proto1/combat_scene.tscn")
+	SceneManager.switch_to_scene(SceneManager.Scenes.COMBAT)

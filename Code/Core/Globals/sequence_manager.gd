@@ -13,9 +13,5 @@ func _ready():
 	GlobalSignals.sequence_state_updated.connect(_on_sequence_state_updated)
 
 
-func _handle_test_signal():
-	print("test signal!")
-
-
 func _on_sequence_state_updated(sequence_state: SequenceState):
 	print("Sequence Manager - A local sequence updated! ", sequence_state)

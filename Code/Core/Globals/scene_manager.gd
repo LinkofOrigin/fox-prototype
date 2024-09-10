@@ -1,25 +1,26 @@
 extends Node
 
-enum Scenes {DEBUG, TOWN, COMBAT, END}
+enum Scenes {DEBUG, TITLE, TOWN, COMBAT, END, GAME_OVER}
+const scene_paths: Dictionary = {
+	Scenes.TITLE: "res://UI/Screens/TitleScreen.tscn",
+	Scenes.TOWN: "res://TestScenes/Proto1/town_scene.tscn",
+	Scenes.COMBAT: "res://TestScenes/Proto1/combat_scene.tscn",
+	Scenes.END: "res://TestScenes/Proto1/end_scene.tscn",
+	Scenes.GAME_OVER: "res://UI/Screens/GameOverScreen.tscn",
+}
 
 var _current_scene
 var _last_scene
 
 
-func _ready():
-	GlobalSignals.scene_loading.connect(_on_scene_loading)
-	GlobalSignals.scene_unloading.connect(_on_scene_unloading)
-
-
-func get_last_scene() -> SceneManager.Scenes:
-	return _last_scene
-
-
-func _on_scene_loading(scene: SceneManager.Scenes):
-	print("new scene loading! New Current Scene ID: ", scene)
+func switch_to_scene(scene: Scenes):
+	GlobalSignals.scene_unloading.emit(_current_scene)
+	get_tree().change_scene_to_file.call_deferred(scene_paths[scene])
+	GlobalSignals.scene_loading.emit(scene)
+	
+	_last_scene = _current_scene
 	_current_scene = scene
 
 
-func _on_scene_unloading(scene: SceneManager.Scenes):
-	print("new scene unloading! New Last Scene ID: ", scene)
-	_last_scene = scene
+func get_last_scene() -> Scenes:
+	return _last_scene

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://5dbvqt7vb22r"]
 
-[ext_resource type="Script" path="res://TestScenes/Proto1/end_scene.gd" id="1_2yl1d"]
+[ext_resource type="Script" path="res://Code/TestScripts/end_scene.gd" id="1_2yl1d"]
 [ext_resource type="Texture2D" uid="uid://dd1dlhe4vs7dj" path="res://Assets/Proto1BGs/TestFoxPrototypeEnd.png" id="1_x7gpj"]
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_glr54"]
 

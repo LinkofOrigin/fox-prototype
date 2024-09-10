@@ -1,7 +1,6 @@
 extends Node
 
 @warning_ignore("unused_signal")
-signal test_signal
 @warning_ignore("unused_signal")
 signal scene_loading(loading_scene: SceneManager.Scenes)
 @warning_ignore("unused_signal")
