@@ -10,8 +10,8 @@
 [ext_resource type="Resource" uid="uid://dkjtrf5sfgt22" path="res://Resources/Health/player_health_resource.tres" id="7_u16hd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljt7x"]
-radius = 30.0
-height = 126.0
+radius = 24.0
+height = 102.0
 
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
@@ -21,7 +21,7 @@ platform_floor_layers = 4294967264
 script = ExtResource("1_d7gmy")
 
 [node name="FoxAnimSprite" parent="." instance=ExtResource("1_d0msv")]
-scale = Vector2(4.67776, 4.67776)
+scale = Vector2(3.65456, 3.65456)
 animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -29,7 +29,7 @@ position = Vector2(-8, 9)
 shape = SubResource("CapsuleShape2D_ljt7x")
 
 [node name="SimpleBow" parent="." instance=ExtResource("2_b6eu2")]
-position = Vector2(1, 30)
+position = Vector2(-1, 26)
 rotation = 0.55804
 
 [node name="PlayerControllerC" parent="." instance=ExtResource("2_4u0vl")]

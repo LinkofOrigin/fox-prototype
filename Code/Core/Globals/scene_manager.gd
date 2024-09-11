@@ -45,7 +45,7 @@ func switch_to_scene(scene: Scenes):
 	_current_loading_scene_path = scene_paths[scene]
 	ResourceLoader.load_threaded_request(_current_loading_scene_path)
 	fade_screen_out()
-	
+	# TODO: Block player control
 	_currently_loading_scene = true
 	_last_scene = _current_scene
 	_current_scene = scene
@@ -65,6 +65,7 @@ func fade_screen_out():
 
 
 func fade_screen_in():
+	_screen_is_faded = false
 	var fade_tween = fade_screen_to_alpha(0)
 	fade_tween.finished.connect(_handle_screen_finished_unfading)
 
@@ -86,4 +87,5 @@ func _handle_screen_finished_fading():
 
 
 func _handle_screen_finished_unfading():
+	# TODO: Return control to player
 	_screen_is_faded = false

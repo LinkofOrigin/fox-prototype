@@ -291,7 +291,7 @@ shape = SubResource("WorldBoundaryShape2D_pxie8")
 [node name="Flatwoods" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(815, 724)
-scale = Vector2(2.45202, 2.45202)
+scale = Vector2(2.00365, 2.00365)
 
 [node name="Sprite2D" type="Sprite2D" parent="Flatwoods"]
 texture = ExtResource("3_04ayd")
@@ -315,7 +315,7 @@ shape = SubResource("RectangleShape2D_rwt6k")
 [node name="Dracomachina" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1420, 912)
-scale = Vector2(2.77243, 2.77243)
+scale = Vector2(2.24626, 2.24626)
 
 [node name="Sprite2D" type="Sprite2D" parent="Dracomachina"]
 scale = Vector2(0.824084, 0.824084)

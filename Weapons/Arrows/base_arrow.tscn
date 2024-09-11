@@ -10,7 +10,7 @@ atlas = ExtResource("4_g2wrg")
 region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_25hsr"]
-size = Vector2(47, 19)
+size = Vector2(41, 12)
 
 [node name="BaseArrow" type="Area2D"]
 process_mode = 4
@@ -23,16 +23,16 @@ movement_resource = ExtResource("2_5sofp")
 damage_resource = ExtResource("3_dqcf6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3.04779, 3.04779)
+scale = Vector2(2.52918, 2.52918)
 texture = SubResource("AtlasTexture_qlls3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1.5)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_25hsr")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-3.09672, -0.668166)
-scale = Vector2(-2.74882, 0.430826)
+position = Vector2(-2.58033, -0.668166)
+scale = Vector2(-2.45218, 0.430826)
 rect = Rect2(-10, -10, 18.02, 20)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
