@@ -8,7 +8,7 @@ variation_embolden = 0.4
 
 [sub_resource type="LabelSettings" id="LabelSettings_adrxr"]
 font = SubResource("FontVariation_1vb44")
-font_size = 80
+font_size = 125
 font_color = Color(0.89, 0.89, 0.89, 1)
 outline_size = 20
 outline_color = Color(0.43, 0.23736, 0.0172, 0.909804)
@@ -22,21 +22,22 @@ content_margin_top = 10.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 bg_color = Color(0.5, 0.324333, 0.19, 0.933333)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.08, 0.08, 0.08, 0.627451)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.08, 0.08, 0.08, 0.858824)
+border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcfyp"]
 bg_color = Color(0.36, 0.22536, 0.1224, 0.933333)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuewo"]
 bg_color = Color(0.568025, 0.372846, 0.224033, 0.933333)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
 border_color = Color(0.08, 0.08, 0.08, 0.627451)
 
 [node name="TitleScreen" type="Control"]
@@ -66,7 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 140
+theme_override_constants/separation = 295
 vertical = true
 
 [node name="MarginContainer" type="MarginContainer" parent="BoxContainer"]
@@ -90,11 +91,10 @@ custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
 keep_pressed_outside = true
 text = "Play"
@@ -104,11 +104,10 @@ custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
 keep_pressed_outside = true
 text = "Settings"

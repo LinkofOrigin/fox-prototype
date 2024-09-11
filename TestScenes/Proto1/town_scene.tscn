@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dpgwq8j571nep"]
+[gd_scene load_steps=24 format=3 uid="uid://dpgwq8j571nep"]
 
 [ext_resource type="Script" path="res://Code/TestScripts/town_scene.gd" id="1_c36em"]
 [ext_resource type="Texture2D" uid="uid://d22tl0dlbggfc" path="res://Assets/Proto1BGs/TestFoxPrototypeTown.png" id="1_rbmk5"]
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_fksxm"]
 [ext_resource type="Texture2D" uid="uid://c6sfvk0ipnoog" path="res://Assets/extraCreatures/flatwoods.png" id="3_04ayd"]
 [ext_resource type="Texture2D" uid="uid://j534bdn3jkom" path="res://Assets/extraCreatures/dracomachina.png" id="4_kt8ir"]
-[ext_resource type="PackedScene" uid="uid://ckb44bjtv738r" path="res://UI/Dialogue/dialogue_base.tscn" id="6_fnbk7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsgkn"]
 size = Vector2(26, 17)
@@ -28,16 +27,16 @@ atlas = SubResource("CompressedTexture2D_ha55j")
 region = Rect2(1840, 1974, 155, 140)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_077g0"]
-size = Vector2(586, 90)
+size = Vector2(1028, 143)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vec7l"]
-size = Vector2(65, 123)
+size = Vector2(106.5, 190)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84u2v"]
-size = Vector2(42, 47)
+size = Vector2(62, 105.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxgqy"]
-size = Vector2(41, 28)
+size = Vector2(41, 51)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3be1"]
 size = Vector2(278, 60)
@@ -60,34 +59,34 @@ size = Vector2(86, 81)
 size = Vector2(75, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey1yn"]
-size = Vector2(96, 220)
+size = Vector2(96, 294.067)
 
 [node name="TownScene" type="Node2D"]
 script = ExtResource("1_c36em")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(544, 360)
-scale = Vector2(0.450886, 0.6)
+position = Vector2(960, 540)
+scale = Vector2(0.787822, 0.908021)
 texture = ExtResource("1_rbmk5")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_fksxm")]
 y_sort_enabled = true
-position = Vector2(831, 187)
+position = Vector2(1679, 353)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
-zoom = Vector2(1.67, 1.67)
+zoom = Vector2(1.33, 1.33)
 limit_left = 0
 limit_top = 0
-limit_right = 1080
-limit_bottom = 720
+limit_right = 1920
+limit_bottom = 1080
 position_smoothing_enabled = true
 
 [node name="Buildings" type="Node" parent="."]
 
 [node name="GreenHouseSmolLeftBig" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(396, 163)
-scale = Vector2(9.0391, 10.9191)
+position = Vector2(728, 168)
+scale = Vector2(15.7246, 18.995)
 collision_layer = 2
 collision_mask = 0
 
@@ -102,7 +101,8 @@ flip_h = true
 
 [node name="RedHouseLargLeftBottom" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(373, 689)
+position = Vector2(624, 1005)
+scale = Vector2(1.25229, 1.25229)
 collision_layer = 2
 collision_mask = 0
 
@@ -117,7 +117,8 @@ flip_h = true
 
 [node name="RedHouseLargLeftRobot" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(372, 483)
+position = Vector2(643, 672)
+scale = Vector2(1.53359, 1.53359)
 collision_layer = 2
 collision_mask = 0
 
@@ -132,8 +133,8 @@ flip_h = true
 
 [node name="RedHouseLargLeftSkinnyLeft" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(357, 326)
-scale = Vector2(0.68, 1)
+position = Vector2(620, 443)
+scale = Vector2(0.914228, 1.34445)
 collision_layer = 2
 collision_mask = 0
 
@@ -148,8 +149,8 @@ flip_h = true
 
 [node name="RedHouseLargLeftSkinnyRight" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(448, 326)
-scale = Vector2(0.68, 1)
+position = Vector2(750, 443)
+scale = Vector2(0.914228, 1.34445)
 collision_layer = 2
 collision_mask = 0
 
@@ -164,8 +165,8 @@ flip_h = true
 
 [node name="GreenHouseSmolRightBottom" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(866, 661)
-scale = Vector2(5.16949, 5.16949)
+position = Vector2(1615, 1005)
+scale = Vector2(7.36342, 7.36342)
 collision_layer = 2
 collision_mask = 0
 
@@ -179,7 +180,7 @@ texture = SubResource("AtlasTexture_1boc8")
 
 [node name="GreenHouseSmolRightBigger" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(992, 509)
+position = Vector2(1806, 831)
 scale = Vector2(6.65818, 6.65818)
 collision_layer = 2
 collision_mask = 0
@@ -194,8 +195,8 @@ texture = SubResource("AtlasTexture_1boc8")
 
 [node name="GreenHouseSmolRightSkinnyRight" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(1022, 359)
-scale = Vector2(3.81818, 6.65818)
+position = Vector2(1836, 681)
+scale = Vector2(4.99967, 8.48488)
 collision_layer = 2
 collision_mask = 0
 
@@ -209,8 +210,8 @@ texture = SubResource("AtlasTexture_1boc8")
 
 [node name="GreenHouseSmolRightSkinnyLeft" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(919, 360)
-scale = Vector2(3.81818, 6.65818)
+position = Vector2(1709, 682)
+scale = Vector2(4.99967, 8.48488)
 collision_layer = 2
 collision_mask = 0
 
@@ -224,8 +225,8 @@ texture = SubResource("AtlasTexture_1boc8")
 
 [node name="RedHouseLargSkinnyRight" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(858, 502)
-scale = Vector2(0.68, 1)
+position = Vector2(1631, 831)
+scale = Vector2(1.36449, 1.36449)
 collision_layer = 2
 collision_mask = 0
 
@@ -239,7 +240,8 @@ texture = SubResource("AtlasTexture_friwx")
 
 [node name="RedHouseLargRobotBotRight" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
-position = Vector2(1003, 646)
+position = Vector2(1817, 968)
+scale = Vector2(1.44763, 1.44763)
 collision_layer = 2
 collision_mask = 0
 
@@ -255,41 +257,41 @@ texture = SubResource("AtlasTexture_friwx")
 collision_mask = 0
 
 [node name="TopBushesColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(796, 40)
+position = Vector2(1437, 63.5)
 shape = SubResource("RectangleShape2D_077g0")
 
 [node name="BotLeftHouseGapColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(405.5, 585)
+position = Vector2(628.25, 856)
 shape = SubResource("RectangleShape2D_vec7l")
 
 [node name="LeftHouseGapColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(416, 400.5)
+position = Vector2(712, 548)
 shape = SubResource("RectangleShape2D_84u2v")
 
 [node name="LeftGreenRedGapColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(472.5, 259)
+position = Vector2(789, 352)
 shape = SubResource("RectangleShape2D_jxgqy")
 
 [node name="BotRightDogHouseColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(952, 589)
+position = Vector2(1671, 1063)
 shape = SubResource("RectangleShape2D_g3be1")
 
 [node name="BotRightDogHouseColl2" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(976.5, 429.5)
+position = Vector2(1625, 923)
 shape = SubResource("RectangleShape2D_yd7e6")
 
 [node name="RightLevelColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(1080, 344)
+position = Vector2(1900, 446)
 shape = SubResource("WorldBoundaryShape2D_15egb")
 
 [node name="BotLevelColl" type="CollisionShape2D" parent="ZoneCollision"]
-position = Vector2(621, 702)
+position = Vector2(1096, 1047)
 shape = SubResource("WorldBoundaryShape2D_pxie8")
 
 [node name="Flatwoods" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(489, 511)
-scale = Vector2(1.17421, 1.17421)
+position = Vector2(815, 724)
+scale = Vector2(2.45202, 2.45202)
 
 [node name="Sprite2D" type="Sprite2D" parent="Flatwoods"]
 texture = ExtResource("3_04ayd")
@@ -312,8 +314,8 @@ shape = SubResource("RectangleShape2D_rwt6k")
 
 [node name="Dracomachina" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(765, 622)
-scale = Vector2(1.30433, 1.30433)
+position = Vector2(1420, 912)
+scale = Vector2(2.77243, 2.77243)
 
 [node name="Sprite2D" type="Sprite2D" parent="Dracomachina"]
 scale = Vector2(0.824084, 0.824084)
@@ -336,16 +338,15 @@ position = Vector2(-5.5, 3.5)
 shape = SubResource("RectangleShape2D_qy42m")
 
 [node name="LevelTransition" type="Area2D" parent="."]
-position = Vector2(1038, 194)
+position = Vector2(1838, 300)
+scale = Vector2(1.66244, 1.66244)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+position = Vector2(0, 37.0336)
 shape = SubResource("RectangleShape2D_ey1yn")
-
-[node name="DialogueBase" parent="." instance=ExtResource("6_fnbk7")]
-visible = false
 
 [connection signal="body_entered" from="Flatwoods/DialogueDetector" to="." method="_on_flatwoods_dialogue_detector_body_entered"]
 [connection signal="body_exited" from="Flatwoods/DialogueDetector" to="." method="_on_flatwoods_dialogue_detector_body_exited"]

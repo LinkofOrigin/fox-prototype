@@ -1,23 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctolkt7tvsfbq"]
+[gd_scene load_steps=9 format=3 uid="uid://ctolkt7tvsfbq"]
 
 [ext_resource type="Script" path="res://Code/TestScripts/combat_scene.gd" id="1_6rj5x"]
 [ext_resource type="Texture2D" uid="uid://c7wng2viibe8k" path="res://Assets/Proto1BGs/TestFoxPrototypeCombat.png" id="1_qlpuc"]
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_w1m56"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_002fg"]
-b = Vector2(234, 620)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_brsn0"]
-b = Vector2(-957, 0)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5d7we"]
-points = PackedVector2Array(-73, 0, -143, 54, -175, 172, 0, 0)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrb2g"]
 size = Vector2(825, 126)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dku1a"]
-size = Vector2(136, 108)
+size = Vector2(324, 319)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sw1ah"]
 
@@ -31,48 +22,39 @@ size = Vector2(63, 182)
 script = ExtResource("1_6rj5x")
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(527, 359)
-scale = Vector2(0.472, 0.613)
+position = Vector2(960, 541)
+scale = Vector2(0.775, 0.921)
 texture = ExtResource("1_qlpuc")
 
 [node name="ZoneCollision" type="Node" parent="."]
 
-[node name="RightLine" type="StaticBody2D" parent="ZoneCollision"]
-position = Vector2(-3, 135)
-collision_layer = 3
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/RightLine"]
-shape = SubResource("SegmentShape2D_002fg")
-
-[node name="BottomLine" type="StaticBody2D" parent="ZoneCollision"]
-position = Vector2(891, 554)
-collision_layer = 3
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/BottomLine"]
-position = Vector2(36, 13)
-shape = SubResource("SegmentShape2D_brsn0")
-
 [node name="BotRightPoly" type="StaticBody2D" parent="ZoneCollision"]
-position = Vector2(1091, 412)
+position = Vector2(1616, 633)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/BotRightPoly"]
-shape = SubResource("ConvexPolygonShape2D_5d7we")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ZoneCollision/BotRightPoly"]
+polygon = PackedVector2Array(11, 16, -87, 283, 295, 10)
 
 [node name="TopPoly" type="StaticBody2D" parent="ZoneCollision"]
-position = Vector2(248, -1)
+position = Vector2(556, -1)
+scale = Vector2(1.28, 1.44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/TopPoly"]
 position = Vector2(426.5, 59)
 shape = SubResource("RectangleShape2D_vrb2g")
 
 [node name="RightTopPoly" type="StaticBody2D" parent="ZoneCollision"]
-position = Vector2(1041, 167)
+position = Vector2(1687, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollision/RightTopPoly"]
-position = Vector2(-22, 5)
+position = Vector2(94, 105.5)
 shape = SubResource("RectangleShape2D_dku1a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ZoneCollision"]
+position = Vector2(201, 606)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ZoneCollision/StaticBody2D"]
+position = Vector2(43, 66.5)
+polygon = PackedVector2Array(-42, -408.5, 251, 261.5, -249, -419.5)
 
 [node name="LevelWalls" type="Node" parent="."]
 
@@ -91,72 +73,74 @@ rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_sw1ah")
 
 [node name="Right" type="StaticBody2D" parent="LevelWalls"]
-position = Vector2(1080, 354)
+position = Vector2(1835, 354)
 rotation = 4.71239
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Right"]
 shape = SubResource("WorldBoundaryShape2D_sw1ah")
 
 [node name="Bot" type="StaticBody2D" parent="LevelWalls"]
-position = Vector2(559, 720)
+position = Vector2(559, 859)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWalls/Bot"]
 shape = SubResource("WorldBoundaryShape2D_sw1ah")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_w1m56")]
-position = Vector2(160, 132)
+position = Vector2(367, 117)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
-zoom = Vector2(1.67, 1.67)
+zoom = Vector2(1.33, 1.33)
 limit_left = 0
 limit_top = 0
-limit_right = 1080
-limit_bottom = 720
+limit_right = 1920
+limit_bottom = 1080
 
 [node name="EnemyStorage" type="Node" parent="."]
 
 [node name="LeftTransition" type="Area2D" parent="."]
-position = Vector2(34, 67)
+position = Vector2(64, 122)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTransition"]
+scale = Vector2(1.90423, 1.90423)
 shape = SubResource("RectangleShape2D_n2e02")
 
 [node name="RightTransition" type="Area2D" parent="."]
-position = Vector2(1058, 319)
+position = Vector2(1771, 476)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTransition"]
+scale = Vector2(2.33344, 2.33344)
 shape = SubResource("RectangleShape2D_uk4wf")
 
 [node name="EnemySpawnMarkers" type="Node" parent="."]
 
 [node name="TopSquidSpawn" type="Marker2D" parent="EnemySpawnMarkers"]
 unique_name_in_owner = true
-position = Vector2(530, 305)
+position = Vector2(1033, 461)
 
 [node name="BotLeftSquidSpawn" type="Marker2D" parent="EnemySpawnMarkers"]
 unique_name_in_owner = true
-position = Vector2(457, 401)
+position = Vector2(960, 557)
 
 [node name="BotRightSquidSpawn" type="Marker2D" parent="EnemySpawnMarkers"]
 unique_name_in_owner = true
-position = Vector2(613, 406)
+position = Vector2(1116, 562)
 
 [node name="BossSpawn" type="Marker2D" parent="EnemySpawnMarkers"]
 unique_name_in_owner = true
-position = Vector2(603, 339)
+position = Vector2(1106, 495)
 
 [node name="PlayerSpawns" type="Node" parent="."]
 
 [node name="PlayerSpawnLeft" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(147, 121)
+position = Vector2(180, 124)
 
 [node name="PlayerSpawnRight" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(950, 326)
+position = Vector2(1612, 485)
 
 [connection signal="body_entered" from="LeftTransition" to="." method="_on_left_transition_body_entered"]

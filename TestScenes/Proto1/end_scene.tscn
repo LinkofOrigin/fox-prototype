@@ -15,38 +15,38 @@ size = Vector2(54, 161)
 [node name="EndScene" type="Node2D"]
 script = ExtResource("1_2yl1d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(534, 361)
-scale = Vector2(0.447, 0.603)
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(957, 548)
+scale = Vector2(0.77406, 0.936286)
 texture = ExtResource("1_x7gpj")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_glr54")]
-position = Vector2(78, 332)
+position = Vector2(238, 503)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
-zoom = Vector2(1.67, 1.67)
+zoom = Vector2(1.33, 1.33)
 limit_left = 0
 limit_top = 0
-limit_right = 1080
-limit_bottom = 720
+limit_right = 1920
+limit_bottom = 1080
 
 [node name="CutsceneTrigger" type="Area2D" parent="."]
-position = Vector2(526, 348)
+position = Vector2(956, 521)
+scale = Vector2(2.14523, 2.14523)
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
-position = Vector2(-2, -1)
 shape = SubResource("RectangleShape2D_65tqa")
 
 [node name="ZoneWalls" type="StaticBody2D" parent="."]
 
 [node name="BottomColl" type="CollisionShape2D" parent="ZoneWalls"]
-position = Vector2(539, 719)
+position = Vector2(969, 1009)
 shape = SubResource("WorldBoundaryShape2D_fhby0")
 
 [node name="RightColl" type="CollisionShape2D" parent="ZoneWalls"]
-position = Vector2(1080, 293)
+position = Vector2(1793, 509)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_fhby0")
 
@@ -61,7 +61,8 @@ rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_fhby0")
 
 [node name="LeftTransition" type="Area2D" parent="."]
-position = Vector2(1, 338)
+position = Vector2(27, 522)
+scale = Vector2(2.00819, 2.00819)
 collision_layer = 0
 collision_mask = 4
 

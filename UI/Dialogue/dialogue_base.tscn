@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cemvuj0vxpwsc" path="res://UI/Dialogue/actor_text_panel.tscn" id="1_p14nt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcw2k"]
-bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.133333)
+bg_color = Color(0.05, 0.05, 0.05, 0.262745)
 corner_detail = 1
 
 [node name="DialogueBase" type="CanvasLayer"]
@@ -23,7 +23,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jcw2k")
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
-offset_left = 140.0
-offset_top = 711.0
-offset_right = 140.0
-offset_bottom = 711.0

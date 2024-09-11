@@ -1,13 +1,13 @@
 class_name SimpleBow
-extends AnimatedSprite2D
+extends Node2D
 
 enum States {IDLE, DRAW, DRAWN, FIRE, IDLEFIDGET}
 const ANIMATIONS: Dictionary = { IDLE = "Idle", IDLEFIDGET = "IdleFidget", DRAW = "Draw", DRAWN = "Drawn", FIRE = "Fire"}
+const BaseArrow := preload("res://Weapons/Arrows/base_arrow.tscn")
 
 var curr_state: States = States.IDLE
 var curr_arrow: BaseArrow
 
-const BaseArrow := preload("res://Weapons/Arrows/base_arrow.tscn")
 
 
 func _ready():
@@ -15,13 +15,13 @@ func _ready():
 
 
 func draw_bow():
-	play(ANIMATIONS.DRAW)
+	$BowAnimatedSprite.play(ANIMATIONS.DRAW)
 	curr_state = States.DRAW
 
 
 func fire_arrow(target_direction: Vector2):
 	# TODO: Implement variable arrow logic to change arrow properties based on draw time (eg. trajectory, damage/crit modifier?)
-	play(ANIMATIONS.FIRE)
+	$BowAnimatedSprite.play(ANIMATIONS.FIRE)
 	curr_state = States.FIRE
 	if curr_arrow != null:
 		curr_arrow.enable_and_fly(target_direction, $ArrowRoot.global_position)
@@ -29,7 +29,7 @@ func fire_arrow(target_direction: Vector2):
 
 
 func play_fidget():
-	play(ANIMATIONS.IDLEFIDGET)
+	$BowAnimatedSprite.play(ANIMATIONS.IDLEFIDGET)
 	curr_state = States.IDLEFIDGET
 
 
@@ -45,8 +45,8 @@ func set_arrow_type(): # TODO: Implement arrow types?
 
 func _on_animation_finished():
 	if curr_state == States.DRAW:
-		play(ANIMATIONS.DRAWN)
+		$BowAnimatedSprite.play(ANIMATIONS.DRAWN)
 		curr_state = States.DRAWN
 	elif curr_state == States.FIRE or curr_state == States.IDLEFIDGET:
-		play(ANIMATIONS.IDLE)
+		$BowAnimatedSprite.play(ANIMATIONS.IDLE)
 		curr_state = States.IDLE

@@ -120,13 +120,16 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="SimpleBow" type="AnimatedSprite2D"]
+[node name="SimpleBow" type="Node2D"]
+script = ExtResource("2_csmrg")
+
+[node name="BowAnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.36522, 3.36522)
 sprite_frames = SubResource("SpriteFrames_6kf57")
 animation = &"Idle"
 autoplay = "Idle"
-script = ExtResource("2_csmrg")
 
 [node name="ArrowRoot" type="Marker2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(1.26925, 0)
 
-[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="BowAnimatedSprite" to="." method="_on_animation_finished"]

@@ -31,6 +31,7 @@ content_margin_bottom = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_mdl60"]
 line_spacing = 0.0
+font_size = 28
 font_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
 shadow_color = Color(0.278431, 0.278431, 0.278431, 0.117647)
 
@@ -51,8 +52,8 @@ atlas = ExtResource("1_cmro1")
 region = Rect2(880, 240, 16, 16)
 
 [node name="TextboxCont" type="VBoxContainer"]
-offset_right = 342.0
-offset_bottom = 128.0
+offset_right = 1300.0
+offset_bottom = 200.0
 theme_override_constants/separation = 0
 script = ExtResource("1_0qetl")
 
@@ -77,6 +78,7 @@ stretch_mode = 1
 
 [node name="MiddleContent" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="LeftBorder" type="TextureRect" parent="MiddleContent"]
