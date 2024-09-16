@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vqfdrutp7tqc"]
+
+[ext_resource type="Script" path="res://TestScenes/debug_canvas.gd" id="1_wi502"]
+[ext_resource type="Script" path="res://TestScenes/debug_draw.gd" id="2_1pjdo"]
+
+[node name="DebugCanvas" type="CanvasLayer"]
+script = ExtResource("1_wi502")
+
+[node name="DebugNode" type="Node2D" parent="."]
+script = ExtResource("2_1pjdo")

@@ -4,7 +4,7 @@ extends Node
 @export_group("Movement Settings")
 @export var movement_resource: MovementResource
 
-var moving_entity: Node2D
+var moving_entity: CharacterBody2D
 var current_direction: Vector2 :set = set_movement_direction
 var current_speed: float = 0
 

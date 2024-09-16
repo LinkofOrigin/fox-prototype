@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://buqyklgjm3230"]
+[gd_scene load_steps=25 format=3 uid="uid://buqyklgjm3230"]
 
 [ext_resource type="Texture2D" uid="uid://beqsvcy1gy21e" path="res://Assets/fox-anim/fox_attack.png" id="1_pknyf"]
 [ext_resource type="Texture2D" uid="uid://b6108v2cjpdin" path="res://Assets/fox-anim/fox_walk.png" id="2_4d4yu"]
@@ -6,21 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://crjehieyfjxk7" path="res://Assets/fox-anim/fox_idle.png" id="3_pnd4a"]
 [ext_resource type="Texture2D" uid="uid://cq7sajfjdhali" path="res://Assets/fox-anim/fox_hit.png" id="4_p6hw5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iimby"]
-atlas = ExtResource("1_pknyf")
-region = Rect2(0, 0, 80, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pshka"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mus58"]
 atlas = ExtResource("2_4d4yu")
 region = Rect2(80, 0, 80, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2bdke"]
-atlas = ExtResource("1_pknyf")
-region = Rect2(640, 0, 80, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ki1f0"]
-atlas = ExtResource("2_4d4yu")
-region = Rect2(240, 0, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mn7j2"]
 atlas = ExtResource("3_edqiv")
@@ -33,6 +21,22 @@ region = Rect2(80, 0, 80, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mlpw"]
 atlas = ExtResource("3_edqiv")
 region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iimby"]
+atlas = ExtResource("1_pknyf")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pshka"]
+atlas = ExtResource("2_4d4yu")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvf3m"]
+atlas = ExtResource("1_pknyf")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0ald"]
+atlas = ExtResource("1_pknyf")
+region = Rect2(480, 0, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tav3v"]
 atlas = ExtResource("3_pnd4a")
@@ -77,20 +81,11 @@ region = Rect2(240, 0, 80, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ph3cv"]
 animations = [{
 "frames": [{
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_iimby")
-}, {
-"duration": 15.0,
-"texture": SubResource("AtlasTexture_pshka")
-}, {
-"duration": 20.0,
-"texture": SubResource("AtlasTexture_2bdke")
-}, {
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_ki1f0")
+"duration": 40.0,
+"texture": SubResource("AtlasTexture_mus58")
 }],
-"loop": false,
-"name": &"Attack",
+"loop": true,
+"name": &"BowDrawn",
 "speed": 60.0
 }, {
 "frames": [{
@@ -105,6 +100,28 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_iimby")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_pshka")
+}],
+"loop": false,
+"name": &"DrawBow",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_rvf3m")
+}, {
+"duration": 13.0,
+"texture": SubResource("AtlasTexture_l0ald")
+}],
+"loop": false,
+"name": &"FireBow",
 "speed": 60.0
 }, {
 "frames": [{
@@ -155,5 +172,6 @@ animations = [{
 
 [node name="FoxAnimSprite" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ph3cv")
-animation = &"Idle"
+animation = &"FireBow"
 autoplay = "Idle"
+frame_progress = 1.0

@@ -1,13 +1,12 @@
 class_name SimpleBow
 extends Node2D
 
-enum States {IDLE, DRAW, DRAWN, FIRE, IDLEFIDGET}
-const ANIMATIONS: Dictionary = { IDLE = "Idle", IDLEFIDGET = "IdleFidget", DRAW = "Draw", DRAWN = "Drawn", FIRE = "Fire"}
+enum States {IDLE, DRAW, DRAWN, FIRE, RELEASING, IDLEFIDGET}
+const ANIMATIONS: Dictionary = {IDLE = "Idle", IDLE_FIDGET = "IdleFidget", DRAW = "Draw", DRAWN = "Drawn", FIRE = "Fire"}
 const BaseArrow := preload("res://Weapons/Arrows/base_arrow.tscn")
 
 var curr_state: States = States.IDLE
 var curr_arrow: BaseArrow
-
 
 
 func _ready():
@@ -15,22 +14,40 @@ func _ready():
 
 
 func draw_bow():
-	$BowAnimatedSprite.play(ANIMATIONS.DRAW)
-	curr_state = States.DRAW
+	play_animation(ANIMATIONS.DRAW)
+	
+
+func release_draw():
+	$BowAnimatedSprite.play_backwards(ANIMATIONS.DRAW)
+	curr_state = States.RELEASING
 
 
 func fire_arrow(target_direction: Vector2):
 	# TODO: Implement variable arrow logic to change arrow properties based on draw time (eg. trajectory, damage/crit modifier?)
-	$BowAnimatedSprite.play(ANIMATIONS.FIRE)
-	curr_state = States.FIRE
+	play_animation(ANIMATIONS.FIRE)
 	if curr_arrow != null:
 		curr_arrow.enable_and_fly(target_direction, $ArrowRoot.global_position)
 		curr_arrow = null # release the ref
 
 
-func play_fidget():
-	$BowAnimatedSprite.play(ANIMATIONS.IDLEFIDGET)
-	curr_state = States.IDLEFIDGET
+func play_animation(animation_name: StringName):
+	print("bow playing: ", animation_name)
+	print("bow has anim: ", ANIMATIONS.find_key(animation_name as String))
+	if ANIMATIONS.find_key(animation_name as String) != null:
+		$BowAnimatedSprite.play(animation_name)
+		match animation_name:
+			ANIMATIONS.IDLE:
+				curr_state = States.IDLE
+			ANIMATIONS.IDLE_FIDGET:
+				curr_state = States.IDLEFIDGET
+			ANIMATIONS.DRAW:
+				curr_state = States.DRAW
+			ANIMATIONS.DRAWN:
+				curr_state = States.DRAWN
+			ANIMATIONS.FIRE:
+				curr_state = States.FIRE
+		
+		print("new bow state: ", curr_state)
 
 
 func nock_new_arrow():
@@ -45,8 +62,8 @@ func set_arrow_type(): # TODO: Implement arrow types?
 
 func _on_animation_finished():
 	if curr_state == States.DRAW:
-		$BowAnimatedSprite.play(ANIMATIONS.DRAWN)
-		curr_state = States.DRAWN
+		play_animation(ANIMATIONS.DRAWN)
 	elif curr_state == States.FIRE or curr_state == States.IDLEFIDGET:
-		$BowAnimatedSprite.play(ANIMATIONS.IDLE)
-		curr_state = States.IDLE
+		play_animation(ANIMATIONS.IDLE)
+	elif curr_state == States.RELEASING:
+		play_animation(ANIMATIONS.IDLE)

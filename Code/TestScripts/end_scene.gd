@@ -16,6 +16,7 @@ func _play_end_cutscene():
 	end_cutscene_playing = true
 	cutscene_resource.set_cutscene_steps([
 			{
+				"animation": "Idle",
 				"wait_time": 2,
 			},
 			{
@@ -65,7 +66,7 @@ func _play_end_cutscene():
 			{
 				"camera_zoom": 1.2,
 				"camera_time": 2,
-				"animation": "player_death",
+				"animation": "Death",
 				"wait_time": 3,
 			},
 			{

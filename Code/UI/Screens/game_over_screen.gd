@@ -3,7 +3,9 @@ extends Control
 
 func _on_try_again_button_pressed():
 	# TODO: Get the current scene and reload the starting state
-	SceneManager.switch_to_last_scene()
+	var switch_successful = SceneManager.switch_to_last_scene()
+	if not switch_successful:
+		SceneManager.switch_to_scene(SceneManager.Scenes.TITLE)
 
 
 func _on_restart_button_pressed():

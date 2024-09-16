@@ -19,10 +19,10 @@ func _physics_process(delta: float):
 	global_translate(trajectory * movement_resource.speed * delta)
 
 
-func enable_and_fly(targetDirection: Vector2, startPoint: Vector2):
+func enable_and_fly(target_direction: Vector2, start_point: Vector2):
 	top_level = true
-	global_position = startPoint
-	trajectory = targetDirection
+	global_position = start_point
+	trajectory = target_direction
 	_currently_flying = true
 	set_process_mode(Node.PROCESS_MODE_INHERIT)
 

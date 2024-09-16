@@ -70,7 +70,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8kmgx")
 }],
-"loop": false,
+"loop": true,
 "name": &"Drawn",
 "speed": 1.0
 }, {
@@ -126,7 +126,7 @@ script = ExtResource("2_csmrg")
 [node name="BowAnimatedSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.67718, 2.67718)
 sprite_frames = SubResource("SpriteFrames_6kf57")
-animation = &"Idle"
+animation = &"Drawn"
 autoplay = "Idle"
 
 [node name="ArrowRoot" type="Marker2D" parent="."]

@@ -3,9 +3,8 @@ extends CharacterBody2D
 
 
 func play_animation(animation: String):
-	if animation == "player_death":
-		$FoxAnimSprite.play("Death")
+	%AnimationPlayer.play(animation)
 
 
 func get_animation_finished_signal():
-	return $FoxAnimSprite.animation_finished
+	return %FoxAnimSprite.animation_finished

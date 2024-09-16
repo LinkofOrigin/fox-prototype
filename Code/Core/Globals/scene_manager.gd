@@ -12,8 +12,8 @@ const scene_paths: Dictionary = {
 	Scenes.GAME_OVER: "res://UI/Screens/GameOverScreen.tscn",
 }
 
-var _current_scene: Scenes
-var _last_scene: Scenes
+var _current_scene: int = -1
+var _last_scene: int = -1
 var _fade_screen: ColorRect
 
 var _currently_loading_scene: bool = false
@@ -51,12 +51,17 @@ func switch_to_scene(scene: Scenes):
 	_current_scene = scene
 
 
-func switch_to_last_scene():
-	switch_to_scene(_last_scene)
+func switch_to_last_scene() -> bool:
+	# TODO: Possibly make this smarter, but need a valid scenario to care enough
+	if _last_scene != -1:
+		switch_to_scene(_last_scene)
+		return true
+	else:
+		return false
 
 
 func get_last_scene() -> Scenes:
-	return _last_scene
+	return _last_scene as Scenes
 
 
 func fade_screen_out():
