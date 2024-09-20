@@ -17,8 +17,11 @@ func reset_game():
 	pass
 
 
+func game_over():
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.GAME_OVER)
+
+
 func _on_player_defeated():
-	_player_defeated = true
 	var cutscene_resource = CutsceneResource.new()
 	cutscene_resource.set_cutscene_steps([
 			
@@ -28,10 +31,13 @@ func _on_player_defeated():
 				"animation": "Death",
 				"wait_time": 4,
 			},
+			{
+				"trigger_game_over": true,
+			}
 			])
 	CutsceneManager.play_cutscene(cutscene_resource)
 
 
 func _on_cutscene_ended():
 	if _player_defeated:
-		SceneManager.switch_to_scene(SceneRegistry.Scenes.GAME_OVER)
+		game_over()

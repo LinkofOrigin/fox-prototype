@@ -101,16 +101,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ovcx"]
-radius = 27.0
-height = 82.0
+radius = 41.0
+height = 118.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly3op"]
-radius = 51.0
-height = 152.0
+radius = 77.0
+height = 224.0
 
 [node name="Proto1Squid" type="CharacterBody2D" groups=["Enemy"]]
 y_sort_enabled = true
-scale = Vector2(1.49556, 1.49556)
 collision_layer = 8
 collision_mask = 31
 motion_mode = 1
@@ -124,6 +123,7 @@ libraries = {
 autoplay = "Idle"
 
 [node name="EnemyAnimSprite" parent="." instance=ExtResource("2_5sprc")]
+scale = Vector2(1.803, 1.803)
 sprite_frames = SubResource("SpriteFrames_5ng6n")
 animation = &"Idle"
 
@@ -141,6 +141,7 @@ movement_resource = ExtResource("6_merbb")
 attack_resource = ExtResource("8_6js2t")
 
 [node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(17, 0)
 collision_layer = 0
 collision_mask = 4
 monitorable = false

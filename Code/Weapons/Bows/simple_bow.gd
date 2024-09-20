@@ -18,8 +18,9 @@ func draw_bow():
 	
 
 func release_draw():
-	$BowAnimatedSprite.play_backwards(ANIMATIONS.DRAW)
-	curr_state = States.RELEASING
+	if $BowAnimatedSprite.animation != "Idle":
+		$BowAnimatedSprite.play_backwards(ANIMATIONS.DRAW)
+		curr_state = States.RELEASING
 
 
 func fire_arrow(target_direction: Vector2):

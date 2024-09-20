@@ -6,7 +6,7 @@ signal cutscene_step_progressed(current_step: int)
 signal cutscene_ended
 signal _cutscene_step_resolved
 
-enum CutsceneStepTypes {DIALOGUE_STEP, CAMERA_STEP, TIMER_STEP}
+enum CutsceneStepTypes {DIALOGUE_STEP, CAMERA_STEP, TIMER_STEP, LEVEL_TRANSITION}
 var _current_resource: CutsceneResource
 var _step_counter: int = 0
 var _cutscene_is_playing: bool = false
@@ -24,6 +24,8 @@ func _ready():
 	
 	add_child(_dialogue_base)
 	_dialogue_base.get_player_progressed_dialogue_signal().connect(_on_player_progressed_dialogue)
+	
+	GlobalSignals.level_ready.connect(_on_level_ready)
 
 
 func set_cutscene_data(cutscene_resource: CutsceneResource):
@@ -41,7 +43,9 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 	_cutscene_is_playing = true
 	
 	var original_camera: Camera2D = get_viewport().get_camera_2d()
-	var original_camera_zoom = original_camera.zoom
+	var original_camera_zoom: Vector2
+	if is_instance_valid(original_camera) and is_instance_of(original_camera, Camera2D):
+		original_camera_zoom = original_camera.zoom
 	var player: PlayerCharacter = get_tree().get_first_node_in_group("Player")
 	
 	for cutscene_step: Dictionary in _current_resource.get_cutscene_steps():
@@ -101,16 +105,24 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 			_cutscene_step_actions_to_resolve.push_back(CutsceneStepTypes.TIMER_STEP)
 			_timer.start(cutscene_step["wait_time"])
 		
-		await _cutscene_step_resolved
+		if cutscene_step.has("trigger_game_over"):
+			_cutscene_step_actions_to_resolve.push_back(CutsceneStepTypes.LEVEL_TRANSITION)
+			GameManager.game_over()
+		
+		if not _cutscene_step_actions_to_resolve.is_empty():
+			await _cutscene_step_resolved
+		
 		_step_counter += 1
 		cutscene_step_progressed.emit(_step_counter)
 	
 	_dialogue_base.hide_dialogue()
-	original_camera.zoom = original_camera_zoom
+	if is_instance_valid(original_camera) and is_instance_of(original_camera, Camera2D):
+		original_camera.zoom = original_camera_zoom
 	
 	_cutscene_is_playing = false
 	cutscene_ended.emit()
 	_reset_cutscene_data()
+	print("Cutscene finished, resuming...")
 
 
 func cutscene_is_playing() -> bool:
@@ -143,3 +155,9 @@ func _on_camera_tween_finished():
 func _on_timer_timeout():
 	_cutscene_step_actions_to_resolve.erase(CutsceneStepTypes.TIMER_STEP)
 	_check_cutscene_step_resolution()
+
+
+func _on_level_ready(_level: Level):
+	if _cutscene_is_playing:
+		_cutscene_step_actions_to_resolve.erase(CutsceneStepTypes.LEVEL_TRANSITION)
+		_check_cutscene_step_resolution()

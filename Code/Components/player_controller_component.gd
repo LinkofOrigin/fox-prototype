@@ -17,7 +17,7 @@ func _ready():
 		bow = _find_bow_comp()
 
 
-func _process(_delta):
+func _process(_delta: float):
 	# EDITOR ONLY
 	if Engine.is_editor_hint():
 		update_configuration_warnings()
@@ -27,6 +27,46 @@ func _process(_delta):
 		pass
 
 
+func _physics_process(_delta: float):
+	# GAME ONLY LOGIC
+	if not Engine.is_editor_hint():
+		_handle_movement()
+
+
+func _handle_movement():
+	if is_in_cutscene:
+		return
+	
+	var movement_vector = _get_left_joystick_vector()
+	var aiming_vector = _get_right_joystick_vector()
+	
+	# Basic movement
+	if movement_component != null:
+		movement_component.set_movement_direction(movement_vector)
+		
+		if not ["BowDrawn", "DrawBow", "FireBow"].has(%AnimationPlayer.assigned_animation):
+			if movement_vector == Vector2(0,0):
+				%AnimationPlayer.play("Idle")
+			else:
+				%AnimationPlayer.play("Walk")
+	
+	if aiming_vector.x > 0:
+		# Face Right
+		owner.scale = Vector2(1,1)
+		owner.rotation_degrees = 0
+	elif aiming_vector.x < 0:
+		# Face Left
+		owner.scale = Vector2(1,-1)
+		owner.rotation_degrees = 180
+	elif movement_vector.x > 0:
+		# Face Right
+		owner.scale = Vector2(1,1)
+		owner.rotation_degrees = 0
+	elif movement_vector.x < 0:
+		# Face Left
+		owner.scale = Vector2(1,-1)
+		owner.rotation_degrees = 180
+
 func _unhandled_input(event: InputEvent):
 	# GAME LOGIC
 	if not Engine.is_editor_hint():
@@ -34,35 +74,7 @@ func _unhandled_input(event: InputEvent):
 			return
 		
 		var movement_vector = _get_left_joystick_vector()
-		
 		var aiming_vector = _get_right_joystick_vector()
-		
-		# Basic movement
-		if movement_component != null:
-			movement_component.set_movement_direction(movement_vector)
-			
-			if not ["BowDrawn", "DrawBow", "FireBow"].has(%AnimationPlayer.assigned_animation):
-				if movement_vector == Vector2(0,0):
-					%AnimationPlayer.play("Idle")
-				else:
-					%AnimationPlayer.play("Walk")
-		
-		if aiming_vector.x > 0:
-			# Face Right
-			owner.scale = Vector2(1,1)
-			owner.rotation_degrees = 0
-		elif aiming_vector.x < 0:
-			# Face Left
-			owner.scale = Vector2(1,-1)
-			owner.rotation_degrees = 180
-		elif movement_vector.x > 0:
-			# Face Right
-			owner.scale = Vector2(1,1)
-			owner.rotation_degrees = 0
-		elif movement_vector.x < 0:
-			# Face Left
-			owner.scale = Vector2(1,-1)
-			owner.rotation_degrees = 180
 		
 		# Using the bow
 		# TODO: Add state check for the bow being fully drawn
@@ -154,7 +166,7 @@ func _on_health_c_health_reached_zero():
 func _on_cutscene_started():
 	is_in_cutscene = true
 	movement_component.stop_moving()
-	if not _is_defeated:
+	if not _is_defeated and not ["Idle", "Walk"].has(%AnimationPlayer.current_animation):
 		%AnimationPlayer.play_backwards("DrawBow")
 		%AnimationPlayer.queue("Idle")
 	bow.release_draw()

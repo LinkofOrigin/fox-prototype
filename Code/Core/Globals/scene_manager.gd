@@ -88,7 +88,7 @@ func _handle_screen_finished_unfading():
 
 
 func _on_level_ready(level: Level):
-	print("level ready!")
+	print("level ready! Scene ID: ", SceneRegistry.Scenes.find_key(level.id))
 	_current_scene = level.id
 
 
@@ -98,5 +98,5 @@ func _on_level_exiting(_level: Level):
 
 
 func _on_level_exited(level: Level):
-	print("level exited!")
+	print("level exited! Scene ID: ", SceneRegistry.Scenes.find_key(level.id))
 	_last_scene = level.id

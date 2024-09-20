@@ -1,4 +1,8 @@
-extends Control
+extends Level
+
+
+func _ready():
+	initialize(SceneRegistry.Scenes.GAME_OVER)
 
 
 func _on_try_again_button_pressed():

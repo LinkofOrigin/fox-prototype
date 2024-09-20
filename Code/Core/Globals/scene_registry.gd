@@ -2,7 +2,6 @@ extends Node
 
 enum Scenes {DEBUG, TITLE, TOWN, COMBAT, END, GAME_OVER}
 
-
 var _scenes: Dictionary = {
 	Scenes.TITLE: SceneData.new(Scenes.TITLE)
 			.with_path("res://UI/Screens/title_screen.tscn"),
