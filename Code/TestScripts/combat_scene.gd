@@ -1,7 +1,7 @@
-extends Node2D
+class_name CombatScene
+extends Level
 
 
-var sequence := SequenceStateStorage.Combat # TODO: Can this be moved to JSON file? Not if we want to reference it via code (unless @tool?)
 const Proto1Enemy: PackedScene = preload("res://Enemies/proto1_enemy.tscn")
 const Proto1Boss: PackedScene = preload("res://Enemies/proto1_boss.tscn")
 
@@ -13,12 +13,13 @@ const _knight_portrait: Texture2D = preload("res://Assets/extraCreatures/armsKni
 
 
 func _ready():
+	initialize(SceneRegistry.Scenes.COMBAT) # TODO: Can this be moved to JSON file? Not if we want to reference it via code (unless @tool?)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
 	
 	var player: Node2D = get_tree().get_first_node_in_group("Player")
-	if SceneManager.get_last_scene() == SceneManager.Scenes.TOWN:
+	if SceneManager.get_last_scene() == SceneRegistry.Scenes.TOWN:
 		player.global_position = $PlayerSpawns/PlayerSpawnLeft.global_position
-	elif SceneManager.get_last_scene() == SceneManager.Scenes.END:
+	elif SceneManager.get_last_scene() == SceneRegistry.Scenes.END:
 		player.global_position = $PlayerSpawns/PlayerSpawnRight.global_position
 	
 	if not sequence.get_state_value(sequence.States.ENEMIES_DEFEATED):
@@ -173,8 +174,8 @@ func _on_cutscene_ended():
 
 
 func _on_left_transition_body_entered(_body: Node2D):
-	SceneManager.switch_to_scene(SceneManager.Scenes.TOWN)
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.TOWN)
 
 
 func _on_right_transition_body_entered(_body: Node2D):
-	SceneManager.switch_to_scene(SceneManager.Scenes.END)
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.END)

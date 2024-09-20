@@ -1,11 +1,11 @@
-extends Node2D
+class_name TownScene
+extends Level
 
 
 @onready var flatwoods: Node2D = %Flatwoods
 @onready var draco: Node2D = %Dracomachina
 @onready var cutscene_resource: CutsceneResource = preload("res://Resources/Cutscenes/cutscene_resource.tres")
 
-var sequence := SequenceStateStorage.Town
 var _player_portrait: Texture2D = preload("res://Assets/Sprites/FoxPortrait.png")
 var _flatwoods_portrait: Texture2D = preload("res://Assets/Sprites/FlatwoodsPortrait.png")
 var _draco_portrait: Texture2D = preload("res://Assets/Sprites/DracoPortrait.png")
@@ -17,6 +17,7 @@ var _repeat_cutscene_lockout: bool = false
 
 
 func _ready():
+	initialize(SceneRegistry.Scenes.TOWN)
 	_resolve_current_state()
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
 
@@ -128,4 +129,4 @@ func _on_cutscene_ended():
 
 
 func _on_level_transition_body_entered(_body: Node2D):
-	SceneManager.switch_to_scene(SceneManager.Scenes.COMBAT)
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.COMBAT)

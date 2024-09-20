@@ -10,6 +10,54 @@
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="6_yevx0"]
 [ext_resource type="Resource" uid="uid://dkjtrf5sfgt22" path="res://Resources/Health/player_health_resource.tres" id="7_u16hd"]
 
+[sub_resource type="Animation" id="Animation_2lamc"]
+resource_name = "BowDrawn"
+length = 0.166668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoxAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"BowDrawn"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("SimpleBow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Drawn"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jx0cx"]
+resource_name = "Death"
+length = 0.166668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FoxAnimSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+
 [sub_resource type="Animation" id="Animation_22qth"]
 resource_name = "DrawBow"
 length = 0.166668
@@ -41,8 +89,8 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_jx0cx"]
-resource_name = "Death"
+[sub_resource type="Animation" id="Animation_6l85o"]
+resource_name = "FireArrow"
 length = 0.166668
 step = 0.0166667
 tracks/0/type = "value"
@@ -55,25 +103,21 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Death"]
+"values": [&"FireBow"]
 }
-
-[sub_resource type="Animation" id="Animation_5umjd"]
-resource_name = "Walk"
-length = 0.166668
-loop_mode = 1
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FoxAnimSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("SimpleBow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Walk"]
+"values": [{
+"args": [&"Fire"],
+"method": &"play_animation"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_fne83"]
@@ -122,9 +166,10 @@ tracks/0/keys = {
 "values": [&"Walk"]
 }
 
-[sub_resource type="Animation" id="Animation_6l85o"]
-resource_name = "FireArrow"
+[sub_resource type="Animation" id="Animation_5umjd"]
+resource_name = "Walk"
 length = 0.166668
+loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -136,52 +181,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"FireBow"]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("SimpleBow")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"Fire"],
-"method": &"play_animation"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_2lamc"]
-resource_name = "BowDrawn"
-length = 0.166668
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FoxAnimSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"BowDrawn"]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("SimpleBow")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"Drawn"],
-"method": &"play_animation"
-}]
+"values": [&"Walk"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eema2"]
@@ -234,7 +234,9 @@ rotation = 0.55804
 movement_resource = ExtResource("5_2kd6u")
 
 [node name="HealthC" parent="." instance=ExtResource("6_yevx0")]
+unique_name_in_owner = true
 health_resource = ExtResource("7_u16hd")
 
 [connection signal="animation_changed" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_changed"]
 [connection signal="current_animation_changed" from="AnimationPlayer" to="AnimationPlayer" method="_on_current_animation_changed"]
+[connection signal="health_reached_zero" from="HealthC" to="PlayerControllerC" method="_on_health_c_health_reached_zero"]

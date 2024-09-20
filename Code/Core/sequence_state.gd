@@ -2,8 +2,6 @@ class_name SequenceState
 extends Node
 
 
-var id: String
-
 var _triggers: Array[SequenceTriggerResource]
 var _state: Dictionary:
 	get = _get_state,
@@ -37,6 +35,7 @@ func reset_to_initial_state():
 
 func _set_state(state: Dictionary):
 	_state = state
+	_handle_sequence_update()
 
 
 func _get_state() -> Dictionary:

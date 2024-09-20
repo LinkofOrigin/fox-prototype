@@ -6,6 +6,8 @@ var bow: SimpleBow
 var movement_component: MovementComponent
 var is_in_cutscene: bool = false
 
+var _is_defeated: bool = false
+
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -31,19 +33,9 @@ func _unhandled_input(event: InputEvent):
 		if is_in_cutscene:
 			return
 		
-		var movement_vector = Input.get_vector(
-				InputActions.MovementActions.LEFT,
-				InputActions.MovementActions.RIGHT,
-				InputActions.MovementActions.UP,
-			 	InputActions.MovementActions.DOWN
-				)
+		var movement_vector = _get_left_joystick_vector()
 		
-		var aiming_vector = Input.get_vector(
-				InputActions.RightJoystick.LEFT,
-				InputActions.RightJoystick.RIGHT,
-				InputActions.RightJoystick.UP, 
-				InputActions.RightJoystick.DOWN
-				)
+		var aiming_vector = _get_right_joystick_vector()
 		
 		# Basic movement
 		if movement_component != null:
@@ -112,6 +104,24 @@ func _unhandled_input(event: InputEvent):
 				bow.draw_bow()
 
 
+func _get_left_joystick_vector() -> Vector2:
+	return Input.get_vector(
+				InputActions.MovementActions.LEFT,
+				InputActions.MovementActions.RIGHT,
+				InputActions.MovementActions.UP,
+			 	InputActions.MovementActions.DOWN
+				)
+
+
+func _get_right_joystick_vector() -> Vector2:
+	return Input.get_vector(
+				InputActions.RightJoystick.LEFT,
+				InputActions.RightJoystick.RIGHT,
+				InputActions.RightJoystick.UP, 
+				InputActions.RightJoystick.DOWN
+				)
+
+
 func _find_movement_comp() -> MovementComponent:
 	for child in get_children():
 		if child is MovementComponent:
@@ -137,13 +147,16 @@ func _get_configuration_warnings() -> PackedStringArray:
 func _on_health_c_health_reached_zero():
 	# TODO: Trigger game over or something
 	print("Player died!")
+	_is_defeated = true
+	GlobalSignals.player_defeated.emit()
 
 
 func _on_cutscene_started():
 	is_in_cutscene = true
 	movement_component.stop_moving()
-	%AnimationPlayer.play_backwards("DrawBow")
-	%AnimationPlayer.queue("Idle")
+	if not _is_defeated:
+		%AnimationPlayer.play_backwards("DrawBow")
+		%AnimationPlayer.queue("Idle")
 	bow.release_draw()
 
 

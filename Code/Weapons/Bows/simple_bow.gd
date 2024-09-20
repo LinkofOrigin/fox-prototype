@@ -31,8 +31,8 @@ func fire_arrow(target_direction: Vector2):
 
 
 func play_animation(animation_name: StringName):
-	print("bow playing: ", animation_name)
-	print("bow has anim: ", ANIMATIONS.find_key(animation_name as String))
+	#print("bow playing: ", animation_name)
+	#print("bow has anim: ", ANIMATIONS.find_key(animation_name as String))
 	if ANIMATIONS.find_key(animation_name as String) != null:
 		$BowAnimatedSprite.play(animation_name)
 		match animation_name:
@@ -47,7 +47,7 @@ func play_animation(animation_name: StringName):
 			ANIMATIONS.FIRE:
 				curr_state = States.FIRE
 		
-		print("new bow state: ", curr_state)
+		#print("new bow state: ", curr_state)
 
 
 func nock_new_arrow():

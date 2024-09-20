@@ -31,6 +31,9 @@ func set_cutscene_data(cutscene_resource: CutsceneResource):
 
 
 func play_cutscene(cutscene_resource: CutsceneResource = null):
+	if _cutscene_is_playing:
+		return false
+	
 	if cutscene_resource != null:
 		set_cutscene_data(cutscene_resource)
 	

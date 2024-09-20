@@ -10,9 +10,11 @@ const ANIMATIONS: Dictionary = {
 		}
 
 
-func _on_current_animation_changed(anim_name: StringName):
-	print("animation is now: ", anim_name)
+func _on_current_animation_changed(_anim_name: StringName):
+	#print("animation is now: ", anim_name)
+	pass
 
 
-func _on_animation_changed(_old_name: StringName, new_name: StringName):
-	print("animation from queue, is now: ", new_name)
+func _on_animation_changed(_old_name: StringName, _new_name: StringName):
+	#print("animation from queue, is now: ", new_name)
+	pass

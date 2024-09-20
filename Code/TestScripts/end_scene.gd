@@ -1,4 +1,5 @@
-extends Node2D
+class_name EndScene
+extends Level
 
 
 const _player_portrait: Texture2D = preload("res://Assets/Sprites/FoxPortrait.png")
@@ -8,6 +9,7 @@ var end_cutscene_playing: bool = false
 
 
 func _ready():
+	initialize(SceneRegistry.Scenes.END)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
 
 
@@ -78,7 +80,7 @@ func _play_end_cutscene():
 
 
 func _on_left_transition_body_entered(_body: Node2D):
-	SceneManager.switch_to_scene(SceneManager.Scenes.COMBAT)
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.COMBAT)
 
 
 func _on_cutscene_trigger_body_entered(_body: Node2D):
@@ -91,4 +93,4 @@ func _on_cutscene_ended():
 
 
 func _load_game_over():
-	SceneManager.switch_to_scene(SceneManager.Scenes.GAME_OVER)
+	SceneManager.switch_to_scene(SceneRegistry.Scenes.GAME_OVER)

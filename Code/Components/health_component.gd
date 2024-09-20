@@ -15,11 +15,11 @@ func _ready():
 
 
 func remove_health(health_to_remove: float):
-	curr_health = max(curr_health - health_to_remove, health_resource.min_health)
+	if curr_health > 0:
+		curr_health = max(curr_health - health_to_remove, health_resource.min_health)
 	
-	if curr_health == 0:
-		health_reached_zero.emit()
-	pass
+		if curr_health == 0:
+			health_reached_zero.emit()
 
 
 func add_health(health_to_add: float):

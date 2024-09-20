@@ -11,20 +11,22 @@ config_version=5
 [application]
 
 config/name="Fox Prototype"
-run/main_scene="res://UI/Screens/TitleScreen.tscn"
+run/main_scene="res://UI/Screens/title_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SequenceManager="*res://Core/Globals/sequence_manager.tscn"
 InputActions="*res://Code/Core/Globals/input_actions.gd"
-GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
-SequenceTriggerFactory="*res://Code/Core/Globals/sequence_trigger_factory.gd"
-CutsceneManager="*res://Code/Core/Globals/cutscene_manager.gd"
-SequenceStateStorage="*res://Code/Resources/sequence_state_storage.gd"
-SceneManager="*res://Code/Core/Globals/scene_manager.gd"
 DebugCanvas="*res://TestScenes/DebugCanvas.tscn"
+GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
+CutsceneManager="*res://Code/Core/Globals/cutscene_manager.gd"
+SequenceManager="*res://Core/Globals/sequence_manager.tscn"
+SequenceStateStorage="*res://Code/Resources/sequence_state_storage.gd"
+SequenceTriggerFactory="*res://Code/Core/Globals/sequence_trigger_factory.gd"
+SceneRegistry="*res://Code/Core/Globals/scene_registry.gd"
+SceneManager="*res://Code/Core/Globals/scene_manager.gd"
+GameManager="*res://Code/Core/Globals/game_manager.gd"
 
 [debug]
 

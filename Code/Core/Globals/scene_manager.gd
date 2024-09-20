@@ -3,15 +3,6 @@ extends Node
 
 @onready var FadeTransition: PackedScene = preload("res://UI/fade_transition.tscn")
 
-enum Scenes {DEBUG, TITLE, TOWN, COMBAT, END, GAME_OVER}
-const scene_paths: Dictionary = {
-	Scenes.TITLE: "res://UI/Screens/TitleScreen.tscn",
-	Scenes.TOWN: "res://TestScenes/Proto1/town_scene.tscn",
-	Scenes.COMBAT: "res://TestScenes/Proto1/combat_scene.tscn",
-	Scenes.END: "res://TestScenes/Proto1/end_scene.tscn",
-	Scenes.GAME_OVER: "res://UI/Screens/GameOverScreen.tscn",
-}
-
 var _current_scene: int = -1
 var _last_scene: int = -1
 var _fade_screen: ColorRect
@@ -22,6 +13,10 @@ var _screen_is_faded: bool = false
 
 
 func _ready():
+	GlobalSignals.level_ready.connect(_on_level_ready)
+	GlobalSignals.level_exiting_tree.connect(_on_level_exiting)
+	GlobalSignals.level_exited_tree.connect(_on_level_exited)
+	
 	_fade_screen = FadeTransition.instantiate()
 	add_child(_fade_screen)
 
@@ -41,11 +36,11 @@ func check_for_loaded_scene():
 			_currently_loading_scene = false
 
 
-func switch_to_scene(scene: Scenes):
-	_current_loading_scene_path = scene_paths[scene]
+func switch_to_scene(scene: SceneRegistry.Scenes):
+	_current_loading_scene_path = SceneRegistry.get_path_for_scene(scene)
 	ResourceLoader.load_threaded_request(_current_loading_scene_path)
 	fade_screen_out()
-	# TODO: Block player control
+	# TODO: Block player control? Signal...
 	_currently_loading_scene = true
 	_last_scene = _current_scene
 	_current_scene = scene
@@ -60,8 +55,8 @@ func switch_to_last_scene() -> bool:
 		return false
 
 
-func get_last_scene() -> Scenes:
-	return _last_scene as Scenes
+func get_last_scene() -> SceneRegistry.Scenes:
+	return _last_scene as SceneRegistry.Scenes
 
 
 func fade_screen_out():
@@ -83,10 +78,6 @@ func fade_screen_to_alpha(alpha_value: float) -> Tween:
 	return fade_tween
 
 
-func _new_scene_ready():
-	print("a new scene is ready!")
-
-
 func _handle_screen_finished_fading():
 	_screen_is_faded = true
 
@@ -94,3 +85,18 @@ func _handle_screen_finished_fading():
 func _handle_screen_finished_unfading():
 	# TODO: Return control to player
 	_screen_is_faded = false
+
+
+func _on_level_ready(level: Level):
+	print("level ready!")
+	_current_scene = level.id
+
+
+func _on_level_exiting(_level: Level):
+	# TODO: Figure this out
+	print("level is exiting I guess :3")
+
+
+func _on_level_exited(level: Level):
+	print("level exited!")
+	_last_scene = level.id
