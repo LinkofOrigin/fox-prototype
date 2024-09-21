@@ -17,6 +17,7 @@ var player: PlayerCharacter
 func _ready():
 	CutsceneManager.cutscene_started.connect(_on_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
+	attack_component.attacking_target.connect(_on_attacking_target)
 	
 	player = get_tree().get_first_node_in_group("Player")
 
@@ -64,6 +65,11 @@ func _on_health_c_health_reached_zero():
 func _on_enemy_animation_player_animation_finished(_animation_name: StringName):
 	if _is_dying:
 		queue_free()
+
+
+func _on_attacking_target(_target_being_attacked: Node2D, _damage_being_dealt: float):
+	$EnemyAnimationPlayer.play("Attack")
+	$EnemyAnimationPlayer.queue("Idle")
 
 
 func _on_attack_area_body_entered(body: Node2D):

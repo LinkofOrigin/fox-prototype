@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2evcu7nf1hu6"]
+[gd_scene load_steps=18 format=3 uid="uid://2evcu7nf1hu6"]
 
 [ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_m82fj"]
 [ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_5sprc"]
@@ -9,6 +9,23 @@
 [ext_resource type="Resource" uid="uid://4w8rmt82a34v" path="res://Resources/Movement/enemy_movement_resource.tres" id="6_merbb"]
 [ext_resource type="PackedScene" uid="uid://d1j6g6a1c11fn" path="res://Components/attack_component.tscn" id="7_70qbg"]
 [ext_resource type="Resource" uid="uid://6n0r871v223y" path="res://Resources/Attacks/base_enemy_attack_resource.tres" id="8_6js2t"]
+
+[sub_resource type="Animation" id="Animation_0ry7g"]
+resource_name = "Attack"
+length = 0.666668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAnimSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 0.392293, 0.329877, 0.176777),
+"update": 0,
+"values": [Vector2(1.803, 1.803), Vector2(1.5, 2.2), Vector2(2.5, 1.5), Vector2(1.803, 1.803)]
+}
 
 [sub_resource type="Animation" id="Animation_7214e"]
 resource_name = "Death"
@@ -67,9 +84,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"Idle"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyAnimSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.803, 1.803)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0wv8i"]
 _data = {
+"Attack": SubResource("Animation_0ry7g"),
 "Death": SubResource("Animation_7214e"),
 "Idle": SubResource("Animation_mihs2"),
 "RESET": SubResource("Animation_j6x6g")

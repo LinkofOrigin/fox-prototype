@@ -69,6 +69,6 @@ func set_text_content(new_text: String):
 
 
 func _input(_event: InputEvent):
-	if _in_text_mode and not _is_input_locked and Input.is_action_just_released("ProgressDialogue"):
+	if _in_text_mode and not _is_input_locked and Input.is_action_just_released(InputActions.MenuActions.MENU_CONFIRM):
 		_is_input_locked = true
 		player_progressed_dialogue.emit()

@@ -7,12 +7,14 @@ var movement_component: MovementComponent
 var is_in_cutscene: bool = false
 
 var _is_defeated: bool = false
-
+var _last_direction: Vector2 = Vector2(1,0) # Default to straight right
+var _transitioning_scenes: bool = false
 
 func _ready():
 	if not Engine.is_editor_hint():
 		CutsceneManager.cutscene_started.connect(_on_cutscene_started)
 		CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
+		SceneManager.loading_new_scene.connect(_on_loading_new_scene)
 		movement_component = _find_movement_comp()
 		bow = _find_bow_comp()
 
@@ -37,18 +39,30 @@ func _handle_movement():
 	if is_in_cutscene:
 		return
 	
+	if _transitioning_scenes:
+		print("player moving with transition")
+		movement_component.set_movement_direction(_last_direction)
+		return
+	
+	print("last direction: ", _last_direction)
 	var movement_vector = _get_left_joystick_vector()
 	var aiming_vector = _get_right_joystick_vector()
 	
 	# Basic movement
 	if movement_component != null:
+		#print("player moving normally")
 		movement_component.set_movement_direction(movement_vector)
+		if movement_vector != Vector2(0,0):
+			_last_direction = movement_vector
 		
 		if not ["BowDrawn", "DrawBow", "FireBow"].has(%AnimationPlayer.assigned_animation):
 			if movement_vector == Vector2(0,0):
 				%AnimationPlayer.play("Idle")
 			else:
 				%AnimationPlayer.play("Walk")
+	
+	if aiming_vector != Vector2(0,0):
+		_last_direction = aiming_vector
 	
 	if aiming_vector.x > 0:
 		# Face Right
@@ -90,12 +104,13 @@ func _unhandled_input(event: InputEvent):
 						target_direction = start_position.direction_to(target_position)
 						#DebugCanvas.set_debug_line(start_position, target_position)
 				elif event is InputEventJoypadMotion:
-					target_direction = aiming_vector.normalized()
+					target_direction = aiming_vector
 					if target_direction == Vector2(0,0):
-						target_direction = movement_vector.normalized()
-					else:
-						# TODO: If both sticks are neutral, shoot in the direction the player is facing? Save last direction fired?
-						pass
+						target_direction = movement_vector
+						
+						if target_direction == Vector2(0,0):
+							# TODO: If both sticks are neutral, shoot in the direction the player is facing? Save last direction fired?
+							target_direction = _last_direction
 				
 				# Fire bow
 				if target_direction != Vector2(0,0):
@@ -157,8 +172,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 func _on_health_c_health_reached_zero():
-	# TODO: Trigger game over or something
-	print("Player died!")
 	_is_defeated = true
 	GlobalSignals.player_defeated.emit()
 
@@ -174,3 +187,10 @@ func _on_cutscene_started():
 
 func _on_cutscene_ended():
 	set_deferred("is_in_cutscene", false)
+
+
+func _on_loading_new_scene(_new_scene: SceneRegistry.Scenes):
+	print("player detected scene transition")
+	_transitioning_scenes = true
+	%CollisionShape2D.set_deferred("disabled", true)
+	%AnimationPlayer.play("Walk")

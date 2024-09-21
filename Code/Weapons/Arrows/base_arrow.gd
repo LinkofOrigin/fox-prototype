@@ -22,7 +22,7 @@ func _physics_process(delta: float):
 func enable_and_fly(target_direction: Vector2, start_point: Vector2):
 	top_level = true
 	global_position = start_point
-	trajectory = target_direction
+	trajectory = target_direction.normalized()
 	_currently_flying = true
 	set_process_mode(Node.PROCESS_MODE_INHERIT)
 

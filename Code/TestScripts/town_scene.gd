@@ -113,7 +113,7 @@ func _on_draco_dialogue_detector_body_exited(_body: Node2D):
 
 
 func _input(_event: InputEvent):
-	if Input.is_action_just_released("ProgressDialogue") and not CutsceneManager.cutscene_is_playing() and not _repeat_cutscene_lockout:
+	if Input.is_action_just_released(InputActions.MenuActions.MENU_CONFIRM) and not CutsceneManager.cutscene_is_playing() and not _repeat_cutscene_lockout:
 		if _flatwoods_can_talk:
 			cutscene_resource.set_cutscene_steps(_get_flatwoods_cutscene_steps())
 			CutsceneManager.set_cutscene_data(cutscene_resource)
@@ -129,4 +129,5 @@ func _on_cutscene_ended():
 
 
 func _on_level_transition_body_entered(_body: Node2D):
+	print("transitioning to COMBAT")
 	SceneManager.switch_to_scene(SceneRegistry.Scenes.COMBAT)

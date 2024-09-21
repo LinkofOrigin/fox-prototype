@@ -1,5 +1,6 @@
 extends Node
 
+signal loading_new_scene(new_scene: SceneRegistry.Scenes)
 
 @onready var FadeTransition: PackedScene = preload("res://UI/fade_transition.tscn")
 
@@ -37,10 +38,13 @@ func check_for_loaded_scene():
 
 
 func switch_to_scene(scene: SceneRegistry.Scenes):
+	print("switching scene")
+	loading_new_scene.emit(scene)
+	
 	_current_loading_scene_path = SceneRegistry.get_path_for_scene(scene)
 	ResourceLoader.load_threaded_request(_current_loading_scene_path)
 	fade_screen_out()
-	# TODO: Block player control? Signal...
+	
 	_currently_loading_scene = true
 	_last_scene = _current_scene
 	_current_scene = scene

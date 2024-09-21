@@ -172,6 +172,5 @@ animations = [{
 
 [node name="FoxAnimSprite" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ph3cv")
-animation = &"FireBow"
+animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 1.0

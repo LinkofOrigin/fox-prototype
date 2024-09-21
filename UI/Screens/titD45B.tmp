@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlflfmuskmfr1"]
+[gd_scene load_steps=8 format=3 uid="uid://dlflfmuskmfr1"]
 
 [ext_resource type="Script" path="res://Code/UI/Screens/title_screen.gd" id="1_bnjh1"]
 [ext_resource type="Texture2D" uid="uid://dnm1e8xloarur" path="res://Assets/Proto1BGs/battleback1.png" id="1_ew18y"]
@@ -21,13 +21,16 @@ content_margin_left = 20.0
 content_margin_top = 10.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
-bg_color = Color(0.82, 0.51332, 0.2788, 1)
+bg_color = Color(0.5, 0.324333, 0.19, 0.933333)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0.08, 0.08, 0.08, 0.858824)
 border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcfyp"]
+bg_color = Color(0.36, 0.22536, 0.1224, 0.933333)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuewo"]
 bg_color = Color(0.568025, 0.372846, 0.224033, 0.933333)
@@ -88,26 +91,24 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_bottom = NodePath("../SettingsButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
 keep_pressed_outside = true
 text = "Play"
 
 [node name="SettingsButton" type="Button" parent="BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 4
-tooltip_text = "Play the game!"
-focus_neighbor_top = NodePath("../PlayButton")
-focus_neighbor_bottom = NodePath("../PlayButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jcfyp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
 keep_pressed_outside = true

@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c6sfvk0ipnoog" path="res://Assets/extraCreatures/flatwoods.png" id="3_04ayd"]
 [ext_resource type="Texture2D" uid="uid://j534bdn3jkom" path="res://Assets/extraCreatures/dracomachina.png" id="4_kt8ir"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey1yn"]
+size = Vector2(96, 294.067)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsgkn"]
 size = Vector2(26, 17)
 
@@ -58,9 +61,6 @@ size = Vector2(86, 81)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qy42m"]
 size = Vector2(75, 59)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey1yn"]
-size = Vector2(96, 294.067)
-
 [node name="TownScene" type="Node2D"]
 script = ExtResource("1_c36em")
 
@@ -80,6 +80,17 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 position_smoothing_enabled = true
+
+[node name="LevelTransition" type="Area2D" parent="."]
+position = Vector2(1838, 300)
+scale = Vector2(1.66244, 1.66244)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+position = Vector2(0, 37.0336)
+shape = SubResource("RectangleShape2D_ey1yn")
 
 [node name="Buildings" type="Node" parent="."]
 
@@ -337,19 +348,8 @@ monitorable = false
 position = Vector2(-5.5, 3.5)
 shape = SubResource("RectangleShape2D_qy42m")
 
-[node name="LevelTransition" type="Area2D" parent="."]
-position = Vector2(1838, 300)
-scale = Vector2(1.66244, 1.66244)
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
-position = Vector2(0, 37.0336)
-shape = SubResource("RectangleShape2D_ey1yn")
-
+[connection signal="body_entered" from="LevelTransition" to="." method="_on_level_transition_body_entered"]
 [connection signal="body_entered" from="Flatwoods/DialogueDetector" to="." method="_on_flatwoods_dialogue_detector_body_entered"]
 [connection signal="body_exited" from="Flatwoods/DialogueDetector" to="." method="_on_flatwoods_dialogue_detector_body_exited"]
 [connection signal="body_entered" from="Dracomachina/DialogueDetector" to="." method="_on_draco_dialogue_detector_body_entered"]
 [connection signal="body_exited" from="Dracomachina/DialogueDetector" to="." method="_on_draco_dialogue_detector_body_exited"]
-[connection signal="body_entered" from="LevelTransition" to="." method="_on_level_transition_body_entered"]

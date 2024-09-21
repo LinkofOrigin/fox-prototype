@@ -1,6 +1,8 @@
 class_name AttackC
 extends Node
 
+signal attacking_target(target: Node2D, damage: float)
+
 @export var attack_resource: AttackResource
 
 var last_attack_timestamp: float = -1 # -1 suggests an attack has not happened yet
@@ -39,6 +41,7 @@ func attack_target_with_modifier(target: Node2D, modifier: float):
 
 
 func _attack_target(target: Node2D, damage: float):
+	attacking_target.emit(target, damage)
 	if target.has_meta(HealthResource.health_meta):
 		target.get_meta(HealthResource.health_meta).remove_health(damage)
 		last_attack_timestamp = Time.get_unix_time_from_system()

@@ -89,8 +89,11 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="TryAgainButton" type="Button" parent="BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../TitleScreenButton")
+focus_neighbor_bottom = NodePath("../RestartButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_a56gg")
@@ -103,6 +106,8 @@ text = "Try Again"
 [node name="RestartButton" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../TryAgainButton")
+focus_neighbor_bottom = NodePath("../TitleScreenButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_a56gg")
@@ -115,6 +120,8 @@ text = "Start Over"
 [node name="TitleScreenButton" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../RestartButton")
+focus_neighbor_bottom = NodePath("../TryAgainButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_a56gg")

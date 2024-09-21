@@ -1,8 +1,12 @@
 extends Level
 
+var _curr_button_index: int = 0
+
 
 func _ready():
 	initialize(SceneRegistry.Scenes.TITLE)
+	
+	%PlayButton.grab_focus.call_deferred()
 
 
 func _on_play_button_pressed():
