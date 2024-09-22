@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cpq2ixabbi3k3"]
+[gd_scene load_steps=18 format=3 uid="uid://cpq2ixabbi3k3"]
 
 [ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_shdng"]
-[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_3si7k"]
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="3_e4rcc"]
 [ext_resource type="Texture2D" uid="uid://il36o8r2a2cx" path="res://Assets/extraCreatures/armsKnight.png" id="4_pdex1"]
 [ext_resource type="PackedScene" uid="uid://ccqv6ndu5smfs" path="res://Components/movement_component.tscn" id="5_f5oiv"]
@@ -168,10 +167,12 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="EnemyAnimSprite" parent="." instance=ExtResource("2_3si7k")]
+[node name="EnemyAnimSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.17865, 3.17865)
 sprite_frames = SubResource("SpriteFrames_31x2i")
 animation = &"Idle"
+autoplay = "Idle"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15.9078, -1.36904)

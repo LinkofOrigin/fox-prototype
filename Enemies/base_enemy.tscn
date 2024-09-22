@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://c7y33pu3yqjxo"]
 
 [ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_wlyxw"]
-[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_uj26b"]
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="3_5kr2t"]
 [ext_resource type="Resource" uid="uid://drfc6x6rk2wcf" path="res://Resources/Health/base_enemy_health_resource.tres" id="4_mv6rr"]
 [ext_resource type="Resource" uid="uid://4w8rmt82a34v" path="res://Resources/Movement/enemy_movement_resource.tres" id="6_47vtx"]
@@ -63,6 +62,24 @@ _data = {
 "RESET": SubResource("Animation_vnvd1")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_tc74r"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"Death",
+"speed": 60.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk",
+"speed": 60.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2hge"]
 size = Vector2(46, 52)
 
@@ -83,8 +100,11 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="EnemyAnimSprite" parent="." instance=ExtResource("2_uj26b")]
+[node name="EnemyAnimSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tc74r")
 animation = &"Death"
+autoplay = "Idle"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)

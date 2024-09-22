@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://2evcu7nf1hu6"]
+[gd_scene load_steps=17 format=3 uid="uid://2evcu7nf1hu6"]
 
 [ext_resource type="Script" path="res://Code/Enemies/base_enemy.gd" id="1_m82fj"]
-[ext_resource type="PackedScene" uid="uid://b35e6rlo8gagi" path="res://Assets/Spritesheets/foxy_char_anim_sprite.tscn" id="2_5sprc"]
 [ext_resource type="PackedScene" uid="uid://bswq5adh5qy0t" path="res://Components/health_component.tscn" id="3_geyjj"]
 [ext_resource type="Texture2D" uid="uid://bj4dwhm247nc6" path="res://Assets/extraCreatures/shredSquid.png" id="3_vuitc"]
 [ext_resource type="Resource" uid="uid://drfc6x6rk2wcf" path="res://Resources/Health/base_enemy_health_resource.tres" id="4_18yay"]
@@ -152,10 +151,12 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="EnemyAnimSprite" parent="." instance=ExtResource("2_5sprc")]
+[node name="EnemyAnimSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.803, 1.803)
 sprite_frames = SubResource("SpriteFrames_5ng6n")
 animation = &"Idle"
+autoplay = "Idle"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
