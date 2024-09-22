@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ct8dhi2jrducb"]
+[gd_scene load_steps=15 format=3 uid="uid://ct8dhi2jrducb"]
 
 [ext_resource type="Script" path="res://Code/UI/Dialogue/textbox_cont.gd" id="1_0qetl"]
 [ext_resource type="Texture2D" uid="uid://b0pcq7rm0k8ow" path="res://Assets/Spritesheets/adventure-ui.png" id="1_cmro1"]
+[ext_resource type="PackedScene" uid="uid://byep08ksp03rx" path="res://UI/confirm_icon.tscn" id="3_4ykg3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kojas"]
 atlas = ExtResource("1_cmro1")
@@ -100,6 +101,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
@@ -108,6 +110,14 @@ text = "Lorem ipsum odor amet, consectetuer adipiscing elit. Malesuada quis vive
 label_settings = SubResource("LabelSettings_mdl60")
 autowrap_mode = 3
 text_overrun_behavior = 1
+
+[node name="ConfirmIcon" parent="MiddleContent/MiddleCanvas" instance=ExtResource("3_4ykg3")]
+layout_mode = 0
+offset_left = 1204.0
+offset_top = 106.0
+offset_right = 1224.0
+offset_bottom = 126.0
+scale = Vector2(2.88601, 2.88601)
 
 [node name="RightBorder" type="TextureRect" parent="MiddleContent"]
 layout_mode = 2

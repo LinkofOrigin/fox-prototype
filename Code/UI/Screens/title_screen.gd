@@ -1,7 +1,5 @@
 extends Level
 
-var _curr_button_index: int = 0
-
 
 func _ready():
 	initialize(SceneRegistry.Scenes.TITLE)

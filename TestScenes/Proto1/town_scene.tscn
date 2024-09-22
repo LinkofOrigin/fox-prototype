@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://dpgwq8j571nep"]
+[gd_scene load_steps=25 format=3 uid="uid://dpgwq8j571nep"]
 
 [ext_resource type="Script" path="res://Code/TestScripts/town_scene.gd" id="1_c36em"]
 [ext_resource type="Texture2D" uid="uid://d22tl0dlbggfc" path="res://Assets/Proto1BGs/TestFoxPrototypeTown.png" id="1_rbmk5"]
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_fksxm"]
 [ext_resource type="Texture2D" uid="uid://c6sfvk0ipnoog" path="res://Assets/extraCreatures/flatwoods.png" id="3_04ayd"]
 [ext_resource type="Texture2D" uid="uid://j534bdn3jkom" path="res://Assets/extraCreatures/dracomachina.png" id="4_kt8ir"]
+[ext_resource type="PackedScene" uid="uid://byep08ksp03rx" path="res://UI/confirm_icon.tscn" id="5_kn3rw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey1yn"]
 size = Vector2(96, 294.067)
@@ -323,11 +324,19 @@ monitorable = false
 position = Vector2(8, 6.5)
 shape = SubResource("RectangleShape2D_rwt6k")
 
-[node name="Label" type="Label" parent="Flatwoods/DialogueDetector"]
-offset_left = -13.9745
+[node name="PromptUI" type="HBoxContainer" parent="Flatwoods/DialogueDetector"]
+visible = false
+offset_left = -21.4608
 offset_top = -53.9016
-offset_right = 26.0255
-offset_bottom = -30.9016
+offset_right = 36.5392
+offset_bottom = -33.9016
+alignment = 1
+
+[node name="ConfirmIcon" parent="Flatwoods/DialogueDetector/PromptUI" instance=ExtResource("5_kn3rw")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Flatwoods/DialogueDetector/PromptUI"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Talk"
 horizontal_alignment = 1
@@ -357,6 +366,24 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dracomachina/DialogueDetector"]
 position = Vector2(-5.5, 3.5)
 shape = SubResource("RectangleShape2D_qy42m")
+
+[node name="PromptUI" type="HBoxContainer" parent="Dracomachina/DialogueDetector"]
+visible = false
+offset_left = -29.3822
+offset_top = -46.7444
+offset_right = 28.6178
+offset_bottom = -26.7444
+alignment = 1
+
+[node name="ConfirmIcon" parent="Dracomachina/DialogueDetector/PromptUI" instance=ExtResource("5_kn3rw")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Dracomachina/DialogueDetector/PromptUI"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Talk"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="LevelTransition" to="." method="_on_level_transition_body_entered"]
 [connection signal="body_entered" from="Flatwoods/DialogueDetector" to="." method="_on_flatwoods_dialogue_detector_body_entered"]

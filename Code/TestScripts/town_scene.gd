@@ -98,18 +98,22 @@ func _get_draco_cutscene_steps() -> Array[Dictionary]:
 
 func _on_flatwoods_dialogue_detector_body_entered(_body: Node2D):
 	_flatwoods_can_talk = true
+	$Flatwoods/DialogueDetector/PromptUI.visible = true
 
 
 func _on_flatwoods_dialogue_detector_body_exited(_body: Node2D):
 	_flatwoods_can_talk = false
+	$Flatwoods/DialogueDetector/PromptUI.visible = false
 
 
 func _on_draco_dialogue_detector_body_entered(_body: Node2D):
 	_draco_can_talk = true
+	$Dracomachina/DialogueDetector/PromptUI.visible = true
 
 
 func _on_draco_dialogue_detector_body_exited(_body: Node2D):
 	_draco_can_talk = false
+	$Dracomachina/DialogueDetector/PromptUI.visible = false
 
 
 func _input(_event: InputEvent):

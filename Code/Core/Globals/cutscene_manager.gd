@@ -49,7 +49,7 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 	var player: PlayerCharacter = get_tree().get_first_node_in_group("Player")
 	
 	for cutscene_step: Dictionary in _current_resource.get_cutscene_steps():
-		print("Attempting cutscene step: ", cutscene_step)
+		#print("Attempting cutscene step: ", cutscene_step)
 		
 		# Dialogue stuff
 		if cutscene_step.has("display_dialogue") and cutscene_step["display_dialogue"]:
@@ -122,7 +122,7 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 	_cutscene_is_playing = false
 	cutscene_ended.emit()
 	_reset_cutscene_data()
-	print("Cutscene finished, resuming...")
+	#print("Cutscene finished, resuming...")
 
 
 func cutscene_is_playing() -> bool:
@@ -137,7 +137,7 @@ func _reset_cutscene_data():
 
 func _check_cutscene_step_resolution():
 	if _cutscene_step_actions_to_resolve.is_empty():
-		print("all step actions resolved!")
+		#print("all step actions resolved!")
 		_cutscene_step_resolved.emit()
 
 

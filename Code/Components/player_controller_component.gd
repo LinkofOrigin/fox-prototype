@@ -40,11 +40,9 @@ func _handle_movement():
 		return
 	
 	if _transitioning_scenes:
-		print("player moving with transition")
 		movement_component.set_movement_direction(_last_direction)
 		return
 	
-	print("last direction: ", _last_direction)
 	var movement_vector = _get_left_joystick_vector()
 	var aiming_vector = _get_right_joystick_vector()
 	
