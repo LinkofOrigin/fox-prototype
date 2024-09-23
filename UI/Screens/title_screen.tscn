@@ -88,8 +88,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_bottom = NodePath("../SettingsButton")
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
@@ -97,20 +95,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
 keep_pressed_outside = true
 text = "Play"
-
-[node name="SettingsButton" type="Button" parent="BoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 60)
-layout_mode = 2
-size_flags_horizontal = 4
-tooltip_text = "Play the game!"
-focus_neighbor_top = NodePath("../PlayButton")
-focus_neighbor_bottom = NodePath("../PlayButton")
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 60
-theme_override_styles/focus = SubResource("StyleBoxFlat_mtyej")
-theme_override_styles/hover = SubResource("StyleBoxFlat_cuewo")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mtyej")
-keep_pressed_outside = true
-text = "Settings"
 
 [connection signal="pressed" from="BoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
