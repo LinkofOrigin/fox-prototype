@@ -67,7 +67,8 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 			elif cutscene_step["portrait"] == 1:
 				_dialogue_base.show_right_portrait_with_text(cutscene_step["text"])
 			else:
-				printerr("Invalid portrait side!")
+				#printerr("Invalid portrait side!")
+				pass
 			
 			_cutscene_step_actions_to_resolve.push_back(CutsceneStepTypes.DIALOGUE_STEP)
 		else:
@@ -106,8 +107,11 @@ func play_cutscene(cutscene_resource: CutsceneResource = null):
 			_timer.start(cutscene_step["wait_time"])
 		
 		if cutscene_step.has("trigger_game_over"):
+			player.trigger_death()
+		
+		if cutscene_step.has("scene_transition"):
 			_cutscene_step_actions_to_resolve.push_back(CutsceneStepTypes.LEVEL_TRANSITION)
-			GameManager.game_over()
+			SceneManager.switch_to_scene(cutscene_step["scene_transition"])
 		
 		if not _cutscene_step_actions_to_resolve.is_empty():
 			await _cutscene_step_resolved

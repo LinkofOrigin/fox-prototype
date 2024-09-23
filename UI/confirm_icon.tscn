@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://byep08ksp03rx"]
 
 [ext_resource type="Texture2D" uid="uid://b5j0idk4yjkkj" path="res://addons/controller_icons/assets/disconnected.png" id="1_44ijv"]
-[ext_resource type="Script" path="res://TestScenes/Proto1/texture_rect.gd" id="2_24mmf"]
+[ext_resource type="Script" path="res://TestScenes/Proto1/confirm_icon.gd" id="2_24mmf"]
 
 [node name="ConfirmIcon" type="TextureRect"]
 custom_minimum_size = Vector2(20, 20)

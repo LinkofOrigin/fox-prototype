@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctolkt7tvsfbq"]
+[gd_scene load_steps=10 format=3 uid="uid://ctolkt7tvsfbq"]
 
 [ext_resource type="Script" path="res://Code/TestScripts/combat_scene.gd" id="1_6rj5x"]
 [ext_resource type="Texture2D" uid="uid://c7wng2viibe8k" path="res://Assets/Proto1BGs/TestFoxPrototypeCombat.png" id="1_qlpuc"]
 [ext_resource type="PackedScene" uid="uid://y026kijomwv2" path="res://Characters/player_character.tscn" id="2_w1m56"]
+[ext_resource type="PackedScene" uid="uid://b7yx5pvifm3tm" path="res://UI/input_indicator.tscn" id="4_mc34n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrb2g"]
 size = Vector2(825, 126)
@@ -94,6 +95,15 @@ limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
+
+[node name="InputIndicator" parent="PlayerCharacter" instance=ExtResource("4_mc34n")]
+unique_name_in_owner = true
+visible = false
+offset_left = -51.0
+offset_top = -78.0
+offset_right = 7.0
+offset_bottom = -58.0
+scale = Vector2(1.69435, 1.69435)
 
 [node name="EnemyStorage" type="Node" parent="."]
 

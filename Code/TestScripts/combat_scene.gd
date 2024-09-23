@@ -82,7 +82,6 @@ func _run_opening_cutscene():
 
 
 func _load_enemies():
-	print("loading enemies!")
 	var enemy_spawns = _get_enemy_spawns()
 	for spawn_location: Marker2D in enemy_spawns:
 		var new_squid = Proto1Enemy.instantiate()
@@ -144,7 +143,6 @@ func _run_boss_defeated_cutscene():
 
 
 func _handle_enemies_defeated():
-	print("all enemies defeated!")
 	sequence.update_state_value(sequence.States.ENEMIES_DEFEATED, true)
 	_actively_fighting_enemies = false
 	$LeftTransition.body_entered.connect(_on_left_transition_body_entered)
@@ -152,7 +150,6 @@ func _handle_enemies_defeated():
 
 
 func _handle_boss_defeated():
-	print("boss defeated")
 	sequence.update_state_value(sequence.States.BOSS_DEFEATED, true)
 	_actively_fighting_boss = false
 	$LeftTransition.body_entered.connect(_on_left_transition_body_entered)
@@ -169,8 +166,15 @@ func _on_enemy_death():
 
 
 func _on_cutscene_ended():
-	# TODO: huh?
-	pass
+	if not sequence.get_state_value(SequenceStateStorage.Combat.States.ENEMIES_DEFEATED):
+		_show_then_hide_input_indicator()
+
+
+func _show_then_hide_input_indicator():
+	# Show input indicator for using the bow
+		%InputIndicator.visible = true
+		await get_tree().create_timer(5).timeout
+		%InputIndicator.visible = false
 
 
 func _on_left_transition_body_entered(_body: Node2D):

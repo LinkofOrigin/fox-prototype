@@ -66,6 +66,9 @@ func _play_end_cutscene():
 				"text": "Is victory all but lost?",
 			},
 			{
+				"trigger_game_over": true
+			},
+			{
 				"camera_zoom": 1.2,
 				"camera_time": 2,
 				"animation": "Death",
@@ -74,6 +77,9 @@ func _play_end_cutscene():
 			{
 				"display_dialogue": true,
 				"text": "GAME OVER",
+			},
+			{
+				"scene_transition": SceneRegistry.Scenes.GAME_OVER,
 			},
 			])
 	CutsceneManager.play_cutscene(cutscene_resource)

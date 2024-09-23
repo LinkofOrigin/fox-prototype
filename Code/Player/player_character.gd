@@ -5,6 +5,6 @@ extends CharacterBody2D
 func play_animation(animation: String):
 	%AnimationPlayer.play(animation)
 
-
-func get_animation_finished_signal():
-	return %FoxAnimSprite.animation_finished
+func trigger_death():
+	$HealthC.remove_health($HealthC.curr_health)
+	%SimpleBow.visible = false

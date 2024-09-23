@@ -2,15 +2,18 @@ class_name SequenceState
 extends Node
 
 
-var _triggers: Array[SequenceTriggerResource]
 var _state: Dictionary:
 	get = _get_state,
 	set = _update_state
 
 
+func _init():
+	pass
+
+
 func get_state_value(key: Variant) -> Variant:
 	if not _state.has(key):
-		printerr("This Sequence does not have that State key! Object=%s Key=%s", self, key)
+		#printerr("This Sequence does not have that State key! Object=%s Key=%s", self, key)
 		return null
 	
 	return _state[key]
@@ -18,15 +21,11 @@ func get_state_value(key: Variant) -> Variant:
 
 func update_state_value(key: Variant, value: Variant):
 	if not _state.has(key):
-		printerr("This Sequence does not have that State key! Object=%s Key=%s", self, key)
+		#printerr("This Sequence does not have that State key! Object=%s Key=%s", self, key)
 		return
 	
-	_update_state({key: value})
-
-
-func add_sequence_trigger(trigger_signal: Signal, trigger_callback: Callable):
-	var new_sequence_trigger = SequenceTriggerFactory.create_new_trigger(trigger_signal, trigger_callback)
-	_triggers.push_back(new_sequence_trigger)
+	var updated_state: Dictionary = {key: value}
+	_update_state(updated_state)
 
 
 func reset_to_initial_state():

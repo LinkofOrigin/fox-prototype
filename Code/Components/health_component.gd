@@ -1,6 +1,7 @@
 class_name HealthComponent
 extends Node
 
+signal health_reduced
 signal health_reached_zero
 
 @export_group("Health Settings")
@@ -20,8 +21,9 @@ func remove_health(health_to_remove: float):
 	
 		if curr_health == 0:
 			health_reached_zero.emit()
+		else:
+			health_reduced.emit()
 
 
 func add_health(health_to_add: float):
 	curr_health = min(curr_health + health_to_add, health_resource.max_health)
-	pass

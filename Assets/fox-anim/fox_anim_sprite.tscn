@@ -38,6 +38,14 @@ region = Rect2(80, 0, 80, 64)
 atlas = ExtResource("1_pknyf")
 region = Rect2(480, 0, 80, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_apld1"]
+atlas = ExtResource("4_p6hw5")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnld1"]
+atlas = ExtResource("4_p6hw5")
+region = Rect2(160, 0, 80, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_tav3v"]
 atlas = ExtResource("3_pnd4a")
 region = Rect2(0, 0, 80, 64)
@@ -53,14 +61,6 @@ region = Rect2(160, 0, 80, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dfog"]
 atlas = ExtResource("3_pnd4a")
 region = Rect2(240, 0, 80, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_apld1"]
-atlas = ExtResource("4_p6hw5")
-region = Rect2(80, 0, 80, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wnld1"]
-atlas = ExtResource("4_p6hw5")
-region = Rect2(160, 0, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3ip"]
 atlas = ExtResource("2_4d4yu")
@@ -103,10 +103,10 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 20.0,
+"duration": 15.0,
 "texture": SubResource("AtlasTexture_iimby")
 }, {
-"duration": 15.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_pshka")
 }],
 "loop": false,
@@ -117,11 +117,22 @@ animations = [{
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_rvf3m")
 }, {
-"duration": 13.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_l0ald")
 }],
 "loop": false,
 "name": &"FireBow",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_apld1")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_wnld1")
+}],
+"loop": false,
+"name": &"Hurt",
 "speed": 60.0
 }, {
 "frames": [{
@@ -139,17 +150,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 60.0
-}, {
-"frames": [{
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_apld1")
-}, {
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_wnld1")
-}],
-"loop": false,
-"name": &"TakeDamage",
 "speed": 60.0
 }, {
 "frames": [{
@@ -172,5 +172,5 @@ animations = [{
 
 [node name="FoxAnimSprite" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ph3cv")
-animation = &"Idle"
+animation = &"Hurt"
 autoplay = "Idle"

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7yx5pvifm3tm"]
+
+[ext_resource type="Script" path="res://UI/input_indicator.gd" id="1_wovw6"]
+[ext_resource type="Texture2D" uid="uid://b5j0idk4yjkkj" path="res://addons/controller_icons/assets/disconnected.png" id="2_4ykx1"]
+
+[node name="InputIndicator" type="HBoxContainer"]
+offset_right = 58.0
+offset_bottom = 20.0
+alignment = 1
+script = ExtResource("1_wovw6")
+
+[node name="InputIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("2_4ykx1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="InputText" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Talk"
+horizontal_alignment = 1
+vertical_alignment = 1

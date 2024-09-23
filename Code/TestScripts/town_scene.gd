@@ -20,6 +20,10 @@ func _ready():
 	initialize(SceneRegistry.Scenes.TOWN)
 	_resolve_current_state()
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_ended)
+	
+	var player: Node2D = get_tree().get_first_node_in_group("Player")
+	if SceneManager.get_last_scene() == SceneRegistry.Scenes.COMBAT:
+		player.global_position = $LevelTransition/SpawnFromCombat.global_position
 
 
 func _process(_delta: float):
@@ -133,5 +137,4 @@ func _on_cutscene_ended():
 
 
 func _on_level_transition_body_entered(_body: Node2D):
-	print("transitioning to COMBAT")
 	SceneManager.switch_to_scene(SceneRegistry.Scenes.COMBAT)

@@ -18,14 +18,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
 InputActions="*res://Code/Core/Globals/input_actions.gd"
 DebugCanvas="*res://TestScenes/DebugCanvas.tscn"
-GlobalSignals="*res://Code/Core/Globals/global_signals.gd"
-CutsceneManager="*res://Code/Core/Globals/cutscene_manager.gd"
-SequenceStateStorage="*res://Code/Resources/sequence_state_storage.gd"
-SequenceTriggerFactory="*res://Code/Core/Globals/sequence_trigger_factory.gd"
-SceneRegistry="*res://Code/Core/Globals/scene_registry.gd"
 SceneManager="*res://Code/Core/Globals/scene_manager.gd"
+SequenceStateStorage="*res://Code/Resources/sequence_state_storage.gd"
+SceneRegistry="*res://Code/Core/Globals/scene_registry.gd"
+CutsceneManager="*res://Code/Core/Globals/cutscene_manager.gd"
 GameManager="*res://Code/Core/Globals/game_manager.gd"
 
 [debug]

@@ -10,6 +10,7 @@ var _is_defeated: bool = false
 var _last_direction: Vector2 = Vector2(1,0) # Default to straight right
 var _transitioning_scenes: bool = false
 
+
 func _ready():
 	if not Engine.is_editor_hint():
 		CutsceneManager.cutscene_started.connect(_on_cutscene_started)
@@ -36,7 +37,7 @@ func _physics_process(_delta: float):
 
 
 func _handle_movement():
-	if is_in_cutscene:
+	if is_in_cutscene or _is_defeated:
 		return
 	
 	if _transitioning_scenes:
@@ -53,7 +54,7 @@ func _handle_movement():
 		if movement_vector != Vector2(0,0):
 			_last_direction = movement_vector
 		
-		if not ["BowDrawn", "DrawBow", "FireBow"].has(%AnimationPlayer.assigned_animation):
+		if not ["BowDrawn", "DrawBow", "FireBow", "Hurt"].has(%AnimationPlayer.assigned_animation):
 			if movement_vector == Vector2(0,0):
 				%AnimationPlayer.play("Idle")
 			else:
@@ -64,25 +65,30 @@ func _handle_movement():
 	
 	if aiming_vector.x > 0:
 		# Face Right
-		owner.scale = Vector2(1,1)
-		owner.rotation_degrees = 0
+		%PlayerBody.scale = Vector2(1,1)
+		%PlayerBody.rotation_degrees = 0
+		%CollisionShape2D.position.x = 0
 	elif aiming_vector.x < 0:
 		# Face Left
-		owner.scale = Vector2(1,-1)
-		owner.rotation_degrees = 180
+		%PlayerBody.scale = Vector2(1,-1)
+		%PlayerBody.rotation_degrees = 180
+		%CollisionShape2D.position.x = 9
 	elif movement_vector.x > 0:
 		# Face Right
-		owner.scale = Vector2(1,1)
-		owner.rotation_degrees = 0
+		%PlayerBody.scale = Vector2(1,1)
+		%PlayerBody.rotation_degrees = 0
+		%CollisionShape2D.position.x = 0
 	elif movement_vector.x < 0:
 		# Face Left
-		owner.scale = Vector2(1,-1)
-		owner.rotation_degrees = 180
+		%PlayerBody.scale = Vector2(1,-1)
+		%PlayerBody.rotation_degrees = 180
+		%CollisionShape2D.position.x = 9
+
 
 func _unhandled_input(event: InputEvent):
 	# GAME LOGIC
 	if not Engine.is_editor_hint():
-		if is_in_cutscene:
+		if is_in_cutscene or _is_defeated:
 			return
 		
 		var movement_vector = _get_left_joystick_vector()
@@ -107,7 +113,6 @@ func _unhandled_input(event: InputEvent):
 						target_direction = movement_vector
 						
 						if target_direction == Vector2(0,0):
-							# TODO: If both sticks are neutral, shoot in the direction the player is facing? Save last direction fired?
 							target_direction = _last_direction
 				
 				# Fire bow
@@ -155,10 +160,8 @@ func _find_movement_comp() -> MovementComponent:
 
 
 func _find_bow_comp() -> SimpleBow:
-	if owner != null:
-		for child in owner.get_children():
-			if child is SimpleBow:
-				return child as SimpleBow
+	if is_instance_valid(%SimpleBow):
+		return %SimpleBow as SimpleBow
 	return null
 
 
@@ -174,13 +177,23 @@ func _on_health_c_health_reached_zero():
 	GlobalSignals.player_defeated.emit()
 
 
+func _on_health_c_health_reduced():
+	%AnimationPlayer.play("Hurt")
+	%AnimationPlayer.queue("Idle")
+
+
 func _on_cutscene_started():
 	is_in_cutscene = true
 	movement_component.stop_moving()
-	if not _is_defeated and not ["Idle", "Walk"].has(%AnimationPlayer.current_animation):
-		%AnimationPlayer.play_backwards("DrawBow")
-		%AnimationPlayer.queue("Idle")
-	bow.release_draw()
+	if not _is_defeated:
+		if %AnimationPlayer.assigned_animation == "BowDrawn":
+			%AnimationPlayer.play_backwards("DrawBow")
+			bow.release_draw()
+			%AnimationPlayer.queue("Idle")
+		else:
+			%AnimationPlayer.play("Idle")
+	else:
+		bow.visible = false
 
 
 func _on_cutscene_ended():
@@ -188,7 +201,7 @@ func _on_cutscene_ended():
 
 
 func _on_loading_new_scene(_new_scene: SceneRegistry.Scenes):
-	print("player detected scene transition")
 	_transitioning_scenes = true
-	%CollisionShape2D.set_deferred("disabled", true)
-	%AnimationPlayer.play("Walk")
+	if not is_in_cutscene and not _is_defeated:
+		%CollisionShape2D.set_deferred("disabled", true)
+		%AnimationPlayer.play("Walk")

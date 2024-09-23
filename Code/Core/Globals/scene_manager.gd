@@ -38,7 +38,6 @@ func check_for_loaded_scene():
 
 
 func switch_to_scene(scene: SceneRegistry.Scenes):
-	print("switching scene")
 	loading_new_scene.emit(scene)
 	
 	_current_loading_scene_path = SceneRegistry.get_path_for_scene(scene)

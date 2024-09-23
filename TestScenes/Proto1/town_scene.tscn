@@ -72,7 +72,7 @@ texture = ExtResource("1_rbmk5")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_fksxm")]
 y_sort_enabled = true
-position = Vector2(1679, 353)
+position = Vector2(766, 1001)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
 zoom = Vector2(1.33, 1.33)
@@ -92,6 +92,9 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
 position = Vector2(0, 37.0336)
 shape = SubResource("RectangleShape2D_ey1yn")
+
+[node name="SpawnFromCombat" type="Marker2D" parent="LevelTransition"]
+position = Vector2(-137.749, 120.907)
 
 [node name="Buildings" type="Node" parent="."]
 
